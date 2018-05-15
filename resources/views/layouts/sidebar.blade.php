@@ -8,7 +8,7 @@
 
     <h4> @icon(newspaper-o) {{ trans_choice('news.news', 2) }}</h4>
     <ul>
-        @include('components.sidebarItem', ["url" => route('reports.index'), "title" => trans_choice('news.news', 2) ])
+        @include('components.sidebarItem', ["url" => route('news.index'), "title" => trans_choice('news.news', 2) ])
     </ul>
     <br>
 
