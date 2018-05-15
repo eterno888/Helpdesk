@@ -1,0 +1,4 @@
+*
+!public/
+!mail_attachments/
+!.gitignore

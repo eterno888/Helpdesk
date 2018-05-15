@@ -1,0 +1,246 @@
+@import "Hurricane/Hurricane";
+@import "Hurricane/Hurricane-Basic";
+@import "Hurricane/Hurricane-Dropdown";
+@import "Hurricane/Hurricane-Tables";
+@import "Hurricane/Hurricane-Grid";
+
+@import "table";
+@import "sidebar";
+@import "inputs";
+@import "ticketEvent";
+@import "TagsInput";
+
+//* {  box-sizing: border-box; }
+@import url('https://fonts.googleapis.com/css?family=Lato:300,300italic,700');
+
+@family-serif: "Lato", sans-serif;
+@family-heads: "Lato", sans-serif;
+
+
+// APP
+@sidebar-width:300px;
+
+body{
+  margin:0;
+  font-family: @family-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  font-weight: 300;
+  color: @gray;
+}
+
+h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.navbar-item,.navbar-link{
+    font-family: @family-heads;
+}
+
+a{
+  .text-decoration-none;
+  color:@brand-second;
+}
+
+.gravatar{
+  border-radius: 50%;
+}
+
+.tinyHeader{
+  position: absolute;
+  right: 35px;
+  top: 20px;
+}
+
+.content{
+  .pt4;
+  margin-left: @sidebar-width;
+  overflow:auto;
+}
+
+.comment{
+  .ph4; .pv4;
+  .bb;
+  min-height:50px;
+}
+
+.new-comment textarea{
+  .br2;  .mb2; .p2;
+  .w100;
+  height:60px;
+  border:1px solid @lighter-gray;
+}
+
+.description{
+  .pt1; .pr3; .pb3; .pl4;
+}
+
+.description h3{
+  font-weight:100;
+  .fs3;
+}
+
+.label{
+  .br1;
+  .uppercase;
+  .ph2; .pv1;
+  font-size:10px;
+}
+
+.ticket-status-new{
+  .white; .bg-danger;
+}
+
+.ticket-status-open{
+  .white;  background-color:pink;
+}
+
+.ticket-status-pending{
+  .white;  background-color:orange;
+}
+
+.ticket-status-solved{
+  .white; .bg-success;
+}
+
+.ticket-status-closed{
+  background-color:gray;  .white;
+}
+
+.lead-status-new{
+  .bold; .white;  background-color:black;
+}
+
+.lead-status-first-contact{
+  .bold; .white;  background-color:gray;
+}
+
+.lead-status-visited{
+  .bold;  .white;  background-color:orange;
+}
+
+.lead-status-completed{
+  .bold; .white;  .bg-success;
+}
+
+.lead-status-failed{
+  .bold;  .white;  .bg-danger
+}
+
+.idea-status-new{
+  .white; .bg-danger;
+}
+
+.idea-status-declined{
+  .white; .bg-danger;
+}
+
+.idea-status-open{
+  .white;  background-color:pink;
+}
+
+.idea-status-accepted{
+  .white;  background-color:lightblue;
+}
+
+.idea-status-pending{
+  .white;  background-color:orange;
+}
+
+.idea-status-solved{
+  .white; .bg-success;
+}
+
+.idea-status-closed{
+  background-color:gray;  .white;
+}
+
+.note{
+  background-color: #FFF9E4;
+}
+
+.button{
+  background-color:@brand;
+  color:white;
+  border:none;
+  cursor: pointer;
+  .p2;  .br1;  .shadow-hard;  .relative;
+}
+
+.button:active, button:active{
+  top:2px;
+  .shadow0;
+}
+
+.secondary{
+  border:solid 1px lighten(@brand-second,20);
+  background-color:transparent;
+  color: @brand-second;
+  font-weight:100;
+  .shadow0;
+  top:1px;
+}
+
+.ternary{
+  background-color:transparent;
+  color: @brand-second;
+  border-color: @lighter-gray;
+  font-weight:100;
+  .shadow0;
+  top:1px;
+}
+
+button{
+  .button;
+}
+
+button:focus {outline:0;}
+
+.actions{
+  .pt3;
+  background-color: @broken-white;
+}
+
+.date{
+  color: @lighter-gray;
+}
+
+.pagination li{
+  list-style: none;
+  display: inline-block;
+  .mr2;
+}
+
+.caret-down{
+  padding: 6px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  margin-left: -2px;
+  vertical-align: text-top;
+}
+
+.pagination{
+  .ml4; .mb-2;
+}
+
+@media (max-width: @phone-max-size) {
+  .content{
+    margin-left:0px;
+  }
+  .tinyHeader{
+    right: 5px;
+    top: 10px;
+  }
+
+  .description{
+    .pb0;
+    .pl2;
+  }
+
+  .description h3{
+    margin-top:-16px;
+    .ml4;
+  }
+  .breadcrumb{
+    margin-top:-13px;
+    .ml4;
+    .mb4;
+  }
+
+}

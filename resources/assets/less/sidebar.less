@@ -1,0 +1,64 @@
+@import "Hurricane/Hurricane";
+
+.sidebar{
+  .pt4;
+  overflow:auto;
+  position: fixed;
+  height: 100%;
+  float: left;
+  background-color:@dark-gray;
+  width: @sidebar-width;
+}
+
+.sidebar img{
+  margin-left: @size4 + @size4 + @size2;
+  .mb1;
+  height:59px;
+}
+
+.sidebar h4{
+  .ml4;
+  color:@lighter-gray;
+}
+
+.sidebar ul{
+}
+
+.sidebar li{
+  .pl4; .pt2; .pr2;
+  list-style: none;
+  height:@size5 - @size2;
+}
+
+.sidebar li a{
+  color: @light-gray;
+  text-decoration: none;
+}
+
+.sidebar li.active{
+  background-color:@darkest-gray;
+  border-left:solid @size1 @brand-second;
+  padding-left: @size4 - @size1;
+  color:white;
+}
+
+.sidebar li.active a{
+  color:white;
+}
+
+.sidebar .label{
+  float:right;
+  .mr2;
+  font-size:12px;
+  background-color: @brand-second;
+  color:white;
+}
+
+@media (max-width:@phone-max-size) {
+  .sidebar{
+    left: -@sidebar-width - 20;
+    .shadow-outer-2;
+    position:absolute;
+    z-index:99;
+  }
+}
