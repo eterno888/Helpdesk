@@ -28,6 +28,11 @@ class DatabaseSeeder extends Seeder
             'assistant'=> true,
         ]);
 
+        factory(User::class)->create([
+            'email'    => 'user@handesk.io',
+            'password' => bcrypt('user'),
+        ]);
+
         Settings::create();
 
         /*$teams = factory(Team::class,4)->create();
