@@ -7,9 +7,9 @@ use Illuminate\Foundation\Http\Kernel as HttpKernel;
 class Kernel extends HttpKernel
 {
     /**
-     * The application's global HTTP middleware stack.
+     * Глобальный стек HTTP промежуточного приложения.
      *
-     * These middleware are run during every request to your application.
+     * Этот промежуточный слой выполняется при каждом запросе к вашему приложению.
      *
      * @var array
      */
@@ -21,7 +21,7 @@ class Kernel extends HttpKernel
     ];
 
     /**
-     * The application's route middleware groups.
+     * Приложение маршрутных промежуточных групп.
      *
      * @var array
      */
@@ -44,9 +44,9 @@ class Kernel extends HttpKernel
     ];
 
     /**
-     * The application's route middleware.
+     * Приложение маршрутных промежуточных групп.
      *
-     * These middleware may be assigned to groups or used individually.
+     * Этот промежуточный слой может быть назначен группам или использоваться индивидуально.
      *
      * @var array
      */

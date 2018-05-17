@@ -9,7 +9,7 @@ use Illuminate\Database\Seeder;
 class DatabaseSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Выполнить сиды базы данных.
      *
      * @return void
      */
@@ -20,6 +20,12 @@ class DatabaseSeeder extends Seeder
             'email'    => 'admin@handesk.io',
             'password' => bcrypt('admin'),
             'admin'    => true,
+        ]);
+
+        factory(User::class)->create([
+            'email'    => 'assistant@handesk.io',
+            'password' => bcrypt('assistant'),
+            'assistant'=> true,
         ]);
 
         Settings::create();

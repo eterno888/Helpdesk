@@ -8,7 +8,7 @@ use Illuminate\Http\Response;
 class ApiAuth
 {
     /**
-     * Handle an incoming request.
+     * Обработка входящего запроса.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next

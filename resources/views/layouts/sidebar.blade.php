@@ -3,22 +3,33 @@
         <span class="fs3 white" onclick="toggleSidebar()">X</span>
     </div>
     <img src="{{ url("/images/handesk_small.png") }}">
+
+    <!--Раздел заявок-->
     @include('layouts.sidebar.tickets')
     <br>
 
-    <h4> @icon(newspaper-o) {{ trans_choice('news.news', 2) }}</h4>
+    <!--Раздел новостей-->
+    <h4> @icon(newspaper-o)  {{ __('news.news') }}</h4>
     <ul>
-        @include('components.sidebarItem', ["url" => route('news.index'), "title" => trans_choice('news.news', 2) ])
+        @include('components.sidebarItem', ["url" => route('news.index'), "title" => __('news.news') ])
     </ul>
     <br>
 
-
+    <!--Раздел базы знаний-->
+    @if(auth()->user()->assistant)
+    <h4> @icon(question-circle-o) {{ __('knowledgebase.knowledgebase') }}</h4>
+        @include('components.sidebarItem', ["url" => route('knowledgebase.index'), "title" => __('knowledgebase.knowledgebase') ])
+    <br>
+@endif
+    <!--Раздел отчетов-->
     <h4> @icon(bar-chart) {{ trans_choice('report.report', 2) }}</h4>
     <ul>
+        @include('components.sidebarItem', ["url" => route('reports.index'), "title" => trans_choice('report.report', 2) ])
         @include('components.sidebarItem', ["url" => route('reports.index'), "title" => trans_choice('report.report', 2) ])
     </ul>
     <br>
 
+    <!--Раздел панели админа-->
     <h4> @icon(cog) {{ trans_choice('admin.admin',2) }}</h4>
     <ul>
         @include('components.sidebarItem', ["url" => route('teams.index'),      "title" => trans_choice('team.team',        2) ])

@@ -7,7 +7,7 @@ use Closure;
 class UserLocale
 {
     /**
-     * Handle an incoming request.
+     * Обработка входящего запроса.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
