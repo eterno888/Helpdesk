@@ -19,8 +19,7 @@
             <tr><td>{{ __("team.name") }}: </td><td class="w60"><input class="w100" name="name"  value="{{$team->name}}" ></td></tr>
             <tr><td>{{ __("team.email") }}:</td><td class="w60"><input class="w100" name="email" value="{{$team->email}}"></td></tr>
             <tr><td>{{ __("team.phone") }}:</td><td class="w60"><input class="w100" name="phone" value="{{$team->phone}}"></td></tr>
-            <tr><td><button class="ph4 uppercase">@busy {{ __('ticket.update') }}</button></td>
-                <td><button class="ph4 uppercase">@busy {{ __('team.remove') }}</button></td></tr>
+            <tr><td><button class="ph4 uppercase">@busy {{ __('ticket.update') }}</button></td></tr>
         </table>
         {{ Form::close() }}
     </div>

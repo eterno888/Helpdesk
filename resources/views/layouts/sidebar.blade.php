@@ -8,37 +8,39 @@
     @include('layouts.sidebar.tickets')
     <br>
 
-    <!--Раздел новостей-->
+<!--Раздел новостей
     <h4> @icon(newspaper-o)  {{ __('news.news') }}</h4>
     <ul>
-        @include('components.sidebarItem', ["url" => route('news.index'), "title" => __('news.news') ])
+
     </ul>
-    <br>
+    <br>-->
 
     <!--Раздел базы знаний-->
     @if(auth()->user()->assistant)
-    <h4> @icon(question-circle-o) {{ __('knowledgebase.knowledgebase') }}</h4>
+        <h4> @icon(question-circle-o) {{ __('knowledgebase.knowledgebase') }}</h4>
         @include('components.sidebarItem', ["url" => route('knowledgebase.index'), "title" => __('knowledgebase.knowledgebase') ])
-    <br>
-@endif
-    <!--Раздел отчетов-->
+        <br>
+    @endif
+
+<!--Раздел отчетов-->
     <h4> @icon(bar-chart) {{ trans_choice('report.report', 2) }}</h4>
     <ul>
-        @include('components.sidebarItem', ["url" => route('reports.index'), "title" => trans_choice('report.report', 2) ])
+        @include('components.sidebarItem', ["url" => route('statistics.index'), "title" => trans_choice('report.statistics', 2) ])
         @include('components.sidebarItem', ["url" => route('reports.index'), "title" => trans_choice('report.report', 2) ])
     </ul>
     <br>
 
     <!--Раздел панели админа-->
-    <h4> @icon(cog) {{ trans_choice('admin.admin',2) }}</h4>
-    <ul>
-        @include('components.sidebarItem', ["url" => route('teams.index'),      "title" => trans_choice('team.team',        2) ])
-        @if(auth()->user()->admin)
-            @include('components.sidebarItem', ["url" => route('users.index'),      "title" => trans_choice('ticket.user',      2) ])
-            @include('components.sidebarItem', ["url" => route('settings.edit', 1), "title" => trans_choice('setting.setting',  2) ])
-        @endif
-    </ul>
-    <br><br>
+    @if(auth()->user()->admin)
+        <h4> @icon(cog) {{ trans_choice('admin.admin',2) }}</h4>
+        <ul>
+            @include('components.sidebarItem', ["url" => route('teams.index'),    "title" => trans_choice('team.team', 2)])
+            @include('components.sidebarItem', ["url" => route('users.index'),"title" => trans_choice('ticket.user', 2)])
+            @include('components.sidebarItem', ["url" => route('news.index'),"title" => 'Тип заявки'])
+            @include('components.sidebarItem', ["url" => route('news.index'), "title" => __('news.news') ])
+        </ul>
+        <br>
+    @endif
 </div>
 
 <div class="show-mobile absolute ml2 mt3 fs3">

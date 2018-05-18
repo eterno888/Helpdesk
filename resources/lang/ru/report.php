@@ -7,4 +7,5 @@ return [
     'onTouchResolutionRatio' => 'Коэффициент разрешения одного касания',
     'reopenedRatio'          => 'Повторно открытое соотношение',
     'filter'                 => 'Фильтр',
+    'statistics'             => 'Статистика',
 ];

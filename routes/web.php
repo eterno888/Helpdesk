@@ -42,33 +42,26 @@ Route::group(['middleware' => ['auth', 'userLocale']], function () {
     Route::post('tickets/{ticket}/issue', 'TicketsIssueController@store')->name('tickets.issue.store');
     Route::post('tickets/{ticket}/idea', 'TicketsIdeaController@store')->name('tickets.idea.store');
 
-    Route::resource('leads', 'LeadsController');
-    Route::get('leads/search/{text}', 'LeadsSearchController@index')->name('leads.search');
-    Route::post('leads/{lead}/assign', 'LeadAssignController@store')->name('leads.assign');
-    Route::post('leads/{lead}/status', 'LeadStatusController@store')->name('leads.status.store');
-    Route::resource('leads/{lead}/tags', 'LeadTagsController', ['only' => ['store', 'destroy'], 'as' => 'leads']);
-    Route::resource('leads/{lead}/tasks', 'LeadTasksController', ['only' => ['index', 'store', 'update', 'destroy'], 'as' => 'leads']);
 
     Route::resource('tasks', 'TasksController', ['only' => ['index', 'update', 'destroy']]);
 
-    Route::resource('teams', 'TeamsController');
-    Route::get('teams/{team}/agents', 'TeamAgentsController@index')->name('teams.agents');
-    Route::get('teams/{token}/join', 'TeamMembershipController@index')->name('membership.index');
-    Route::post('teams/{token}/join', 'TeamMembershipController@store')->name('membership.store');
+
 
     Route::group(['middleware' => 'can:see-admin'], function () {
-        Route::resource('ideas', 'IdeasController');
-        Route::get('roadmap', 'RoadmapController@index')->name('roadmap.index');
-        Route::resource('ideas/{idea}/tags', 'IdeaTagsController', ['only' => ['store', 'destroy'], 'as' => 'ideas']);
-        Route::post('ideas/{idea}/issue', 'IdeaIssueController@store')->name('ideas.issue.store');
-
         Route::resource('users', 'UsersController', ['only' => ['index', 'destroy']]);
         Route::get('users/{user}/impersonate', 'UsersController@impersonate')->name('users.impersonate');
         Route::resource('settings', 'SettingsController', ['only' => ['edit', 'update']]);
+        Route::get('news', 'NewsController@index')->name('news.index');
+
+        Route::resource('teams', 'TeamsController');
+        Route::get('teams/{team}/agents', 'TeamAgentsController@index')->name('teams.agents');
+        Route::get('teams/{token}/join', 'TeamMembershipController@index')->name('membership.index');
+        Route::post('teams/{token}/join', 'TeamMembershipController@store')->name('membership.store');
     });
 
     Route::get('reports', 'ReportsController@index')->name('reports.index');
-    Route::get('news', 'NewsController@index')->name('news.index');
+    Route::get('statistics', 'StatisticsController@index')->name('statistics.index');
+
 
     //для исполнителей
     Route::get('knowledgebase', 'KnowledgebaseController@index')->name('knowledgebase.index');

@@ -4,11 +4,9 @@
         <h3> {{ trans_choice('team.team', 2) }} ( {{ $teams->count() }} )</h3>
     </div>
 
-    @if(auth()->user()->admin)
         <div class="m4">
             <a class="button " href="{{ route("teams.create") }}">@icon(plus) {{ __('team.new') }}</a>
         </div>
-    @endif
 
     @paginator($teams)
     <table class="striped">
@@ -41,9 +39,9 @@
                     <td></td>
                 @endcan
                 <th> <a href="{{route('tickets.index')}}?team={{$team->id}}"> @icon(inbox) </a></th>
-                <th> <a href="{{route('leads.index')}}?team={{$team->id}}"> @icon(dot-circle-o) </a></th>
                 @can('administrate', $team)
                     <th> <a href="{{route('teams.edit',$team)}}"> @icon(pencil) </a></th>
+                    <th> <a href="3"> @icon(trash) </a></th>
                 @endcan
             </tr>
         @endforeach
