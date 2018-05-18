@@ -24,7 +24,7 @@ class TeamsController extends Controller
         Team::create([
             'name'              => request('name'),
             'email'             => request('email'),
-            'slack_webhook_url' => request('slack_webhook_url'),
+            'phone'             => request('phone'),
             'token'             => str_random(24),
         ]);
 
@@ -41,7 +41,7 @@ class TeamsController extends Controller
         $team->update([
             'name'              => request('name'),
             'email'             => request('email'),
-            'slack_webhook_url' => request('slack_webhook_url'),
+            'phone'             => request('phone'),
             'token'             => str_random(24),
         ]);
 
