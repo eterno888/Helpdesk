@@ -72,14 +72,4 @@ class TicketPolicy
     public function assignToTeam(User $user, Ticket $ticket)
     {
     }
-
-    public function createIssue(User $user, Ticket $ticket)
-    {
-        return false;
-    }
-
-    public function createIdea(User $user, Ticket $ticket)
-    {
-        return true;
-    }
 }

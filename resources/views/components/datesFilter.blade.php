@@ -1,6 +1,6 @@
 <a class="button secondary dropdown">
     @icon(calendar)
-    {{ Carbon\Carbon::parse( $repository->startDate)->format("D M Y")  }} -
+    {{ Carbon\Carbon::parse( $repository->startDate)->format("jS F Y")  }} -
     {{ Carbon\Carbon::parse( $repository->endDate)->format("jS F Y")  }}
 </a>
 <div class="dropdown-container">

@@ -58,7 +58,7 @@ class Team extends BaseModel
     public static function membersByTeam()
     {
         return [__('team.none') => [null => '--']] + self::all()->mapWithKeys(function ($team) {
-            return [$team->name => $team->members->pluck('name', 'id')->toArray()];
-        })->toArray();
+                return [$team->name => $team->members->pluck('name', 'id')->toArray()];
+            })->toArray();
     }
 }

@@ -9,8 +9,6 @@ class ReportsController extends Controller
 {
     public function index(KpiRepository $repository)
     {
-        Carbon::setLocale('ru');
-
         $startDate = request('startDate') ?: Carbon::now()->startOfMonth();
         $endDate   = request('endDate') ?: Carbon::now()->endOfMonth();
 
