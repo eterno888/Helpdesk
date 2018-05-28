@@ -1,20 +1,20 @@
 <a class="button secondary dropdown">
     @icon(calendar)
-    {{ Carbon\Carbon::parse( $repository->startDate)->format("jS F Y")  }} -
+    {{ Carbon\Carbon::parse( $repository->startDate)->format("D M Y")  }} -
     {{ Carbon\Carbon::parse( $repository->endDate)->format("jS F Y")  }}
 </a>
 <div class="dropdown-container">
     <div class="grid">
         <div class="p3">
             <ul class="mt-2">
-                <li class="pb1"><a class="pointer" onclick="filterSetToday()">Today</a></li>
-                <li class="pb1"><a class="pointer" onclick="filterSetYesterday()"> Yesterday</a></li>
-                <li class="pb1"><a class="pointer" onclick="filterSetThisWeek()"> This week</a></li>
-                <li class="pb1"><a class="pointer" onclick="filterSetThisMonth()"> This Month</a></li>
-                <li class="pb1"><a class="pointer" onclick="filterSetLastDays(30)"> Last 30 days</a></li>
-                <li class="pb1"><a class="pointer" onclick="filterSetLastDays(60)"> Last 60 days</a></li>
-                <li class="pb3"><a class="pointer" onclick="filterSetLastDays(90)"> Last 90 days</a></li>
-                <li class=""><a class="button secondary pointer" onclick="$('#custom-date-range').show('fast')"> Custom range</a></li>
+                <li class="pb1"><a class="pointer" onclick="filterSetToday()"> Сегодня</a></li>
+                <li class="pb1"><a class="pointer" onclick="filterSetYesterday()"> Вчера</a></li>
+                <li class="pb1"><a class="pointer" onclick="filterSetThisWeek()"> Эта неделя</a></li>
+                <li class="pb1"><a class="pointer" onclick="filterSetThisMonth()"> Этот месяц</a></li>
+                <li class="pb1"><a class="pointer" onclick="filterSetLastDays(30)"> Последние 30 дней</a></li>
+                <li class="pb1"><a class="pointer" onclick="filterSetLastDays(60)"> Последние 60 дней</a></li>
+                <li class="pb3"><a class="pointer" onclick="filterSetLastDays(90)"> Последние 90 дней</a></li>
+                <li class=""><a class="button secondary pointer" onclick="$('#custom-date-range').show('fast')">Пользовательский диапазон</a></li>
             </ul>
         </div>
         <div id="custom-date-range" class="pl3 pt1 hidden bl">

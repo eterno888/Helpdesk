@@ -4,16 +4,13 @@ namespace App;
 
 use Carbon\Carbon;
 use App\Authenticatable\Admin;
-use App\Services\IssueCreator;
 use App\Events\TicketCommented;
 use App\Notifications\NewComment;
 use App\Authenticatable\Assistant;
 use App\Events\TicketStatusUpdated;
-use Illuminate\Support\Facades\App;
 use App\Notifications\TicketCreated;
 use App\Notifications\TicketAssigned;
 use App\Notifications\TicketEscalated;
-use App\Services\TicketLanguageDetector;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Ticket extends BaseModel
@@ -261,74 +258,4 @@ class Ticket extends BaseModel
         return $this->requester->name;
     }
 
-    //========================================================
-    // ISSUE
-    //========================================================
-    public function createIssue(IssueCreator $issueCreator, $repository)
-    {
-        $issue = $issueCreator->createIssue(
-                $repository,
-                $this->title,
-                'Issue from ticket: '.route('tickets.show', $this)."   \n\r".$this->body
-        );
-        $this->addNote(auth()->user(), "Issue created https://bitbucket.org{$issue->resource_uri} with id #{$issue->local_id}");
-        //TODO: Notify somebody? if so, create the test
-        TicketEvent::make($this, "Issue created #{$issue->local_id} at {$repository}");
-
-        return $issue;
-    }
-
-    public function findIssueNote()
-    {
-        return $this->commentsAndNotes->first(function ($comment) {
-            return starts_with($comment->body, 'Issue created');
-        });
-    }
-
-    public function getIssueId()
-    {
-        $issueNote = $this->findIssueNote();
-        if (! $issueNote) {
-            return null;
-        }
-
-        return substr($issueNote->body, strpos($issueNote->body, '#') + 1);
-    }
-
-    public function issueUrl()
-    {
-        $issueNote = $this->findIssueNote();
-        if (! $issueNote) {
-            return null;
-        }
-        $start  = strpos($issueNote->body, 'https://');
-        $end    = strpos($issueNote->body, 'with id');
-        $apiUrl = substr($issueNote->body, $start, $end - $start);
-
-        return str_replace('api.', '', str_replace('1.0/repositories/', '', $apiUrl));
-    }
-
-    public function createIdea()
-    {
-        $idea = Idea::create([
-            'requester_id' => $this->requester_id,
-            'title'        => $this->title,
-            'body'         => $this->body,
-        ])->attachTags(['ticket']);
-        TicketEvent::make($this, "Idea created #{$idea->id}");
-        App::setLocale((new TicketLanguageDetector($this))->detect());
-        $this->addComment(auth()->user(), __('idea.fromTicket'), self::STATUS_SOLVED);
-
-        return $idea;
-    }
-
-    public function getIdeaId()
-    {
-        $issueEvent = $this->events()->where('body', 'like', '%Idea created%')->first();
-        if (! $issueEvent) {
-            return null;
-        }
-
-        return explode('#', $issueEvent->body)[1];
-    }
 }

@@ -44,6 +44,8 @@ class Kpi extends BaseModel
 
     public static function obtain(Carbon $date, $relation_id, $type)
     {
+        Carbon::setLocale('ru');
+
         return static::firstOrCreate([
             'date'        => $date->toDateString(),
             'relation_id' => $relation_id,

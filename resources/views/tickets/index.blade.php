@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="description">
-        <h3>Tickets ( {{ $tickets->count() }} )</h3>
+        <h3>Заявки ( {{ $tickets->count() }} )</h3>
     </div>
 
     <div class="m4">
@@ -10,7 +10,7 @@
     </div>
 
     <div class="float-right mt-5 mr4">
-        <input id="searcher" placeholder="{{__('lead.search')}}" class="ml2">
+        <input id="searcher" placeholder="{{__('ticket.search')}}" class="ml2">
         <div class="inline ml-4">@icon(search)</div>
     </div>
 

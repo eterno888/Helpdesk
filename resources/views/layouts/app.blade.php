@@ -16,8 +16,7 @@
 </head>
 <body>
     <div id="app">
-
-{{--        @include('layouts.header')--}}
+        {{--@include('layouts.header')--}}
         @include('layouts.tinyHeader')
         @include('layouts.sidebar')
         <div class="content container-fluid">
@@ -30,7 +29,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script>
-        //TODO: Move custom scripts to a file so it can be minified with laravel mix
+        //TODO: Перемещение пользовательских сценариев в файл, чтобы его можно было минимизировать с помощью laravel mix
         function copyToClipboard(element) {
             var $temp = $("<input>");
             $("body").append($temp);

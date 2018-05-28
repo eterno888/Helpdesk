@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Ticket;
 use App\Repositories\TicketsRepository;
 
@@ -9,6 +10,9 @@ class TicketsController extends Controller
 {
     public function index(TicketsRepository $repository)
     {
+
+        Carbon::setLocale('ru');
+
         if (request('assigned')) {
             $tickets = $repository->assignedToMe();
         } elseif (request('unassigned')) {

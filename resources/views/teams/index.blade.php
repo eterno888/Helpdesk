@@ -40,8 +40,8 @@
                 @endcan
                 <th> <a href="{{route('tickets.index')}}?team={{$team->id}}"> @icon(inbox) </a></th>
                 @can('administrate', $team)
-                    <th> <a href="{{route('teams.edit',$team)}}"> @icon(pencil) </a></th>
-                    <th> <a href="3"> @icon(trash) </a></th>
+                    <th> <a href="{{route('teams.edit',$team)}}"> @icon(pencil) </a> </th>
+                    <th> <a href="{{route('teams.destroy',$team)}}" class="delete-resource">@icon(trash)</a> </th>
                 @endcan
             </tr>
         @endforeach

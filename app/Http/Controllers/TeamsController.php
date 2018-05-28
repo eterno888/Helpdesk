@@ -18,6 +18,13 @@ class TeamsController extends Controller
         return view('teams.create');
     }
 
+    public function destroy(Team $team)
+    {
+        $team->delete();
+
+        return back();
+    }
+
     public function store()
     {
         $this->authorize('create', Team::class);

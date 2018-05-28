@@ -28,7 +28,7 @@
                 <div class="mb1">
                     {{ __('ticket.note') }}: {{ Form::checkbox('private') }}
                 </div>
-                <button class="mt1 uppercase ph3"> @icon(comment) {{ __('ticket.commentAs') }} {{ $ticket->statusName() }}</button>
+                <button class="mt1 uppercase ph3"> @icon(comment) {{ __('ticket.comment') }} </button>
                 <span class="dropdown button caret-down"> @icon(caret-down) </span>
                 <ul class="dropdown-container">
                     <li><a class="pointer" onClick="setStatusAndSubmit( {{ App\Ticket::STATUS_OPEN    }} )"><div style="width:10px; height:10px" class="circle inline ticket-status-open mr1"></div> {{ __('ticket.commentAs') }} <b>{{ __("ticket.open") }}   </b> </a></li>

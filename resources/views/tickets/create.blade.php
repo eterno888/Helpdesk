@@ -17,7 +17,7 @@
 
     <div class="comment new-comment">
         <table class="maxw600 no-padding">
-            <tr><td class="w20">Subject: </td>     <td><input name="title" class="w100" required/></td></tr>
+            <tr><td class="w20">Тема: </td>     <td><input name="title" class="w100" required/></td></tr>
             <tr><td>{{ trans_choice('ticket.tag', 2)}}: </td><td><input     name="tags" id="tags"/></td></tr>
             <tr><td>{{ __('ticket.comment')         }}: </td><td><textarea  name="body" required></textarea></td></tr>
             @include('components.assignTeamField')
@@ -27,7 +27,7 @@
                     App\Ticket::STATUS_OPEN     => __("ticket.open"),
                     App\Ticket::STATUS_PENDING  => __("ticket.pending"),
                 ]) }}
-                <button class="uppercase ph3 ml1"> @icon(comment) {{ __('ticket.new') }}</button> </td>
+                <button class="uppercase ph3 ml1"> @icon(comment) {{ __('ticket.send') }}</button> </td>
             </tr>
         </table>
         {{ Form::close() }}

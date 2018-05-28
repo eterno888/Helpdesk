@@ -36,7 +36,6 @@
         <ul>
             @include('components.sidebarItem', ["url" => route('teams.index'),    "title" => trans_choice('team.team', 2)])
             @include('components.sidebarItem', ["url" => route('users.index'),"title" => trans_choice('ticket.user', 2)])
-            @include('components.sidebarItem', ["url" => route('news.index'),"title" => 'Тип заявки'])
             @include('components.sidebarItem', ["url" => route('news.index'), "title" => __('news.news') ])
         </ul>
         <br>
