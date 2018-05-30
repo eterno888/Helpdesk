@@ -31,9 +31,9 @@
 
     <!--Раздел панели админа-->
     @if(auth()->user()->admin)
-        <h4> @icon(cog) {{ trans_choice('admin.admin',2) }}</h4>
+        <h4> @icon(cog) {{ __('admin.admin') }}</h4>
         <ul>
-            @include('components.sidebarItem', ["url" => route('teams.index'),    "title" => trans_choice('team.team', 2)])
+            @include('components.sidebarItem', ["url" => route('teams.index'),"title" => trans_choice('team.team', 2)])
             @include('components.sidebarItem', ["url" => route('users.index'),"title" => trans_choice('ticket.user', 2)])
             @include('components.sidebarItem', ["url" => route('news.index'), "title" => __('news.news') ])
         </ul>

@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', 'HomeController@index');
 
 Auth::routes();
@@ -39,11 +28,6 @@ Route::group(['middleware' => ['auth', 'userLocale']], function () {
     Route::post('tickets/{ticket}/escalate', 'TicketsEscalateController@store')->name('tickets.escalate.store');
     Route::delete('tickets/{ticket}/escalate', 'TicketsEscalateController@destroy')->name('tickets.escalate.destroy');
 
-    Route::post('tickets/{ticket}/issue', 'TicketsIssueController@store')->name('tickets.issue.store');
-    Route::post('tickets/{ticket}/idea', 'TicketsIdeaController@store')->name('tickets.idea.store');
-
-
-    Route::resource('tasks', 'TasksController', ['only' => ['index', 'update', 'destroy']]);
 
 
 
@@ -51,7 +35,9 @@ Route::group(['middleware' => ['auth', 'userLocale']], function () {
         Route::resource('users', 'UsersController', ['only' => ['index', 'destroy']]);
         Route::get('users/{user}/impersonate', 'UsersController@impersonate')->name('users.impersonate');
         Route::resource('settings', 'SettingsController', ['only' => ['edit', 'update']]);
-        Route::get('news', 'NewsController@index')->name('news.index');
+
+        Route::resource('news', 'NewsController');
+        Route::post('news', 'NewsController@store')->name('news.store');
 
         Route::resource('teams', 'TeamsController');
         Route::get('teams/{team}/agents', 'TeamAgentsController@index')->name('teams.agents');
@@ -60,9 +46,8 @@ Route::group(['middleware' => ['auth', 'userLocale']], function () {
     });
 
     Route::get('reports', 'ReportsController@index')->name('reports.index');
+
     Route::get('statistics', 'StatisticsController@index')->name('statistics.index');
 
-
-    //для исполнителей
     Route::get('knowledgebase', 'KnowledgebaseController@index')->name('knowledgebase.index');
 });
