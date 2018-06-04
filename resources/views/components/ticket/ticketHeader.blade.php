@@ -5,7 +5,7 @@
                 @if( $ticket->isEscalated() ) @icon(flag) @endif
                 <a href="{{ route('tickets.show', $ticket) }}"> #{{ $ticket->id }}. {{  str_limit($ticket->title, 35) }}</a>
         </td>
-        <td> {{ $ticket->requester->name            }}</td>
+        <td> {{ nameOrDash( $ticket->requester )    }}</td>
         <td> {{ nameOrDash( $ticket->team )         }}</td>
         <td> {{ nameOrDash( $ticket->user )         }}</td>
         <td class="hide-mobile"> {{ $ticket->created_at->diffForHumans()}}</td>

@@ -22,11 +22,6 @@ class Requester extends BaseModel
         return $this->hasMany(Ticket::class);
     }
 
-    public function ideas()
-    {
-        return $this->hasMany(Idea::class);
-    }
-
     public function openTickets()
     {
         return $this->tickets()->where('status', '<', Ticket::STATUS_SOLVED);

@@ -42,7 +42,10 @@ function toTime($minutes)
     $hours           = floor(($minutes - $days * ($minutes_per_day)) / Carbon::MINUTES_PER_HOUR);
     $mins            = (int) ($minutes - ($days * ($minutes_per_day)) - ($hours * 60));
 
-    return "{$days} Days {$hours} Hours {$mins} Mins";
+    if ($days = 0){
+        return "{$hours} Часа {$mins} Минут";
+    }
+    return "{$days} День {$hours} Часа {$mins} Минут";
 }
 
 function toPercentage($value, $inverse = false)

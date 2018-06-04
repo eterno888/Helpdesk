@@ -8,7 +8,6 @@ use App\Events\TicketCommented;
 use App\Notifications\NewComment;
 use App\Authenticatable\Assistant;
 use App\Events\TicketStatusUpdated;
-use App\Notifications\TicketCreated;
 use App\Notifications\TicketAssigned;
 use App\Notifications\TicketEscalated;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -29,21 +28,21 @@ class Ticket extends BaseModel
     const PRIORITY_NORMAL = 2;
     const PRIORITY_HIGH   = 3;
 
-    public static function createAndNotify($requester, $title, $body, $tags)
+    public static function createAndNotify($requester_id, $title, $body, $tags)
     {
-        $requester = Requester::findOrCreate($requester['name'] ?? 'Unknown', $requester['email'] ?? null);
-        $ticket    = $requester->tickets()->create([
+        $tiket = Ticket::create([
+            'requester'    => $requester_id,
             'title'        => $title,
             'body'         => $body,
             'public_token' => str_random(24),
-        ])->attachTags($tags);
+        ]);
 
-        tap(new TicketCreated($ticket), function ($newTicketNotification) use ($requester) {
+      /*  tap(new TicketCreated($ticket), function ($newTicketNotification) use ($requester) {
             Admin::notifyAll($newTicketNotification);
             $requester->notify($newTicketNotification);
-        });
+        });*/
 
-        return $ticket;
+        return $tiket;
     }
 
     public static function findWithPublicToken($public_token)
@@ -58,7 +57,7 @@ class Ticket extends BaseModel
 
     public function requester()
     {
-        return $this->belongsTo(Requester::class);
+        return $this->belongsTo(User::class);
     }
 
     public function team()

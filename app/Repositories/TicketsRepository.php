@@ -2,7 +2,9 @@
 
 namespace App\Repositories;
 
+use App\Requester;
 use App\Ticket;
+use App\User;
 use Carbon\Carbon;
 
 class TicketsRepository
@@ -18,6 +20,10 @@ class TicketsRepository
 
     public function assignedToMe()
     {
+       /* if (auth()->user()){
+            return Ticket::where('requestors.name', '=', User::name);
+        }*/
+
         return auth()->user()->tickets()->where('status', '<', Ticket::STATUS_SOLVED);
     }
 
