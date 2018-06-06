@@ -1,5 +1,6 @@
 <?php
 
+//Route::get('/', 'AuthLdapController');
 Route::get('/', 'HomeController@index');
 
 Auth::routes();
@@ -8,8 +9,6 @@ Route::group(['prefix' => 'requester'], function () {
     Route::get('tickets/{token}', 'RequesterTicketsController@show')->name('requester.tickets.show');
     Route::post('tickets/{token}/comments', 'RequesterCommentsController@store')->name('requester.comments.store');
 });
-
-Route::post('webhook/bitbucket', 'WebhookController@store');
 
 Route::group(['middleware' => ['auth', 'userLocale']], function () {
     Route::get('profile', 'ProfileController@show')->name('profile.show');
@@ -20,6 +19,7 @@ Route::group(['middleware' => ['auth', 'userLocale']], function () {
     Route::post('tickets/merge', 'TicketsMergeController@store')->name('tickets.merge.store');
     Route::get('tickets/search/{text}', 'TicketsSearchController@index')->name('tickets.search');
     Route::resource('tickets', 'TicketsController', ['except' => ['edit', 'destroy']]);
+    Route::get('ticket/selection', 'TicketsController@choice')->name('tickets.choice');
     Route::post('tickets/{ticket}/assign', 'TicketsAssignController@store')->name('tickets.assign');
     Route::post('tickets/{ticket}/comments', 'CommentsController@store')->name('comments.store');
     Route::resource('tickets/{ticket}/tags', 'TicketsTagsController', ['only' => ['store', 'destroy'], 'as' => 'tickets']);
@@ -27,9 +27,6 @@ Route::group(['middleware' => ['auth', 'userLocale']], function () {
 
     Route::post('tickets/{ticket}/escalate', 'TicketsEscalateController@store')->name('tickets.escalate.store');
     Route::delete('tickets/{ticket}/escalate', 'TicketsEscalateController@destroy')->name('tickets.escalate.destroy');
-
-
-
 
     Route::group(['middleware' => 'can:see-admin'], function () {
         Route::resource('users', 'UsersController', ['only' => ['index', 'destroy']]);

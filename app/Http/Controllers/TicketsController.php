@@ -53,6 +53,16 @@ class TicketsController extends Controller
         return view('tickets.create', ['user' => $user]);
     }
 
+    public function choice()
+    {
+        return view('tickets.choice', ['user' => auth()->user()]);
+    }
+
+    public function selection()
+    {
+
+    }
+
     public function store()
     {
         $requester_id = auth()->user()->id;
@@ -79,4 +89,6 @@ class TicketsController extends Controller
 
         return back();
     }
+
+
 }

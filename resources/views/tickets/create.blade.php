@@ -51,7 +51,6 @@
             </tr>
         </table>
         {{ Form::close() }}
-    </div>
 @endsection
 
 
