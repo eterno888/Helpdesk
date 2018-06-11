@@ -25,12 +25,7 @@ class User extends Authenticatable
 
     public function tickets()
     {
-        return $this->hasMany(Ticket::class)->with('requester', 'user', 'team');
-    }
-
-    public function leads()
-    {
-        return $this->hasMany(Lead::class)->with('user', 'team');
+        return $this->hasMany(Ticket::class)->with('user', 'team');
     }
 
     public function teams()
@@ -50,12 +45,6 @@ class User extends Authenticatable
                        ->where('memberships.user_id', $this->id)->select('tickets.*');
         //return $this->belongsToMany(Ticket::class, "memberships", "team_id", "team_id");
         //return $this->hasManyThrough(Ticket::class, Membership::class,"user_id","team_id")->with('requester','user','team');
-    }
-
-    public function teamsLeads()
-    {
-        return Lead::join('memberships', 'leads.team_id', '=', 'memberships.team_id')
-                ->where('memberships.user_id', $this->id)->select('leads.*');
     }
 
     public function tasks()
@@ -101,7 +90,6 @@ class User extends Authenticatable
     public function delete()
     {
         $this->tickets()->update(['user_id' => null]);
-        $this->leads()->update(['user_id' => null]);
 
         return parent::delete();
     }

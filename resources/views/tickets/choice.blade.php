@@ -5,23 +5,14 @@
             <a href="{{ url()->previous() }}">{{ trans_choice('ticket.ticket', 2) }}</a>
         </div>
     </div>
+
     <div class="m4">
-    <a class="button " href="{{ route("tickets.create") }}">@icon(plus) {{ __('ticket.newTicket') }}</a>
-        <br>
-        <br>
-    <a class="button " href="{{ route("tickets.create") }}">@icon(plus) {{ __('ticket.newTicket') }}</a>
-        <br>
-        <br>
-    <a class="button " href="{{ route("tickets.create") }}">@icon(plus) {{ __('ticket.newTicket') }}</a>
-        <br>
-        <br>
-    <a class="button " href="{{ route("tickets.create") }}">@icon(plus) {{ __('ticket.newTicket') }}</a>
-        <br>
-        <br>
-    <a class="button " href="{{ route("tickets.create") }}">@icon(plus) {{ __('ticket.newTicket') }}</a>
-        <br>
-        <br>
-    <a class="button " href="{{ route("tickets.create") }}">@icon(plus) {{ __('ticket.newTicket') }}</a>
-    </div>
+    @foreach($ticketTypes as $ticketType)
+
+        <a class="button" href="{{ route('tickets.create', $ticketType) }}"> {{ $ticketType->name }} </a> <br><br>
+
+    @endforeach
+    <div>
+
 
 @endsection

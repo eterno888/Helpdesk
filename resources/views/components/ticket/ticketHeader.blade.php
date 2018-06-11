@@ -3,7 +3,7 @@
                 <input type="checkbox" name="selected[{{$ticket->id}}]" meta:index="{{$ticket->id}}" class="hidden selector">
                 <span class="label ticket-status-{{ $ticket->statusName() }}">{{ str_limit(__('ticket.' . $ticket->statusName()), 1, '') }}</span>&nbsp;
                 @if( $ticket->isEscalated() ) @icon(flag) @endif
-                <a href="{{ route('tickets.show', $ticket) }}"> #{{ $ticket->id }}. {{  str_limit($ticket->title, 35) }}</a>
+                <a href="{{ route('tickets.show', $ticket) }}"> {{  str_limit($ticket->title, 40) }}</a>
         </td>
         <td> {{ nameOrDash( $ticket->requester )    }}</td>
         <td> {{ nameOrDash( $ticket->team )         }}</td>

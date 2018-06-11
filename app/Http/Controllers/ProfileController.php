@@ -16,9 +16,14 @@ class ProfileController extends Controller
         $user = auth()->user();
 
         $user->update([
-            'name'   => $request->get('name'),
-            'locale' => $request->get('locale'),
-            'email'  => $request->get('email', $user->email),
+            'name'          => $request->get('name'),
+            'locale'        => $request->get('locale'),
+            'email'         => $request->get('email', $user->email),
+            'cabinet'       => $request->get('cabinet', $user->cabinet),
+            'phone'         => $request->get('phone'),
+            'position'      => $request->get('position'),
+            'subdivision'   => $request->get('subdivision'),
+            'lead'          => $request->get('lead'),
         ]);
 
         $user->settings()->updateOrCreate([], $request->only('tickets_signature') + $this->notificationSettings($request));

@@ -6,7 +6,7 @@
         </div>
         <h3>#{{ $ticket->id }}. {{ $ticket->title }} </h3>
         @busy <span class="label ticket-status-{{ $ticket->statusName() }}">{{ __("ticket." . $ticket->statusName() ) }}</span> &nbsp;
-        <span class="date">{{  $ticket->created_at->diffForHumans() }} · {{  $ticket->requester->name }} &lt;{{$ticket->requester->email}}&gt;</span>
+        <span class="date">{{  $ticket->created_at->diffForHumans() }} · {{  $ticket->requester->name }} · {{$ticket->requester->phone}} · {{$ticket->requester->cabinet}}</span>
         {{--<a class="ml4" title="Public Link" href="{{route('requester.tickets.show',$ticket->public_token)}}"> @icon(globe) </a>--}}
 
         @include('components.ticket.actions')
@@ -20,7 +20,6 @@
         <div class="comment new-comment">
             {{ Form::open(["url" => route("comments.store", $ticket) , "files" => true, "id" => "comment-form"]) }}
             <textarea name="body"></textarea>
-            @include('components.uploadAttachment', ["attachable" => $ticket, "type" => "tickets"])
             {{ Form::hidden('new_status', $ticket->status, ["id" => "new_status"]) }}
             @if($ticket->isEscalated() )
                 <button class="mt1 uppercase ph3"> @icon(comment) {{ __('ticket.note') }} </button>
@@ -45,7 +44,7 @@
 
 
 @section('scripts')
-    @include('components.js.taggableInput', ["el" => "tags", "endpoint" => "tickets", "object" => $ticket])
+    {{--}}@include('components.js.taggableInput', ["el" => "tags", "endpoint" => "tickets", "object" => $ticket])--}}
     <script>
         function setStatusAndSubmit(new_status){
             $("#new_status").val(new_status);

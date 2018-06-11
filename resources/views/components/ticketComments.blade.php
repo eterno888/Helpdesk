@@ -11,7 +11,6 @@
                     @if($comment->private) @icon(sticky-note-o) @endif
                     {!! nl2br( strip_tags($comment->body)) !!}
                 </div>
-                @include('components.attachments', ["attachments" => $comment->attachments])
             </div>
         @endif
     @endforeach
@@ -22,5 +21,4 @@
             <div class="pt1">{{ $ticket->requester->name }} · {{ $ticket->created_at->diffForHumans() }}</div>
         </div>
         <div>{!! nl2br( strip_tags($ticket->body)) !!} </div>
-        @include('components.attachments', ["attachments" => $ticket->attachments])
     </div>

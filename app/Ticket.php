@@ -28,13 +28,17 @@ class Ticket extends BaseModel
     const PRIORITY_NORMAL = 2;
     const PRIORITY_HIGH   = 3;
 
-    public static function createAndNotify($requester_id, $title, $body, $tags)
+    public static function createAndNotify($requester_id, $title, $body)
     {
-        $tiket = Ticket::create([
-            'requester'    => $requester_id,
-            'title'        => $title,
-            'body'         => $body,
-            'public_token' => str_random(24),
+
+        $ticket_type_id = TicketType::findWithTitle($title)->id;
+
+        $ticket = Ticket::create([
+            'requester_id'   => $requester_id,
+            'title'          => $title,
+            'body'           => $body,
+            'public_token'   => str_random(24),
+            'ticket_type_id' => $ticket_type_id
         ]);
 
       /*  tap(new TicketCreated($ticket), function ($newTicketNotification) use ($requester) {
@@ -42,7 +46,7 @@ class Ticket extends BaseModel
             $requester->notify($newTicketNotification);
         });*/
 
-        return $tiket;
+        return $ticket;
     }
 
     public static function findWithPublicToken($public_token)
@@ -186,27 +190,40 @@ class Ticket extends BaseModel
         })->reject(function ($ticket) {
             return $ticket->id == $this->id || $ticket->status > Ticket::STATUS_SOLVED;
         })->each(function ($ticket) use ($user) {
-            $ticket->addNote($user, "Merged with #{$this->id}");
+            $ticket->addNote($user, "Объединена с #{$this->id}");
             $ticket->updateStatus(Ticket::STATUS_MERGED);
             $this->mergedTickets()->attach($ticket);
         });
+
+        //Короч, есть атрибут checked. Типа как value у других.
+        //И он имеет значение true, false. Его так же можно проверять на сервере
     }
 
     public function updateStatus($status)
     {
         $this->update(['status' => $status, 'updated_at' => Carbon::now()]);
-        TicketEvent::make($this, 'Status updated: '.$this->statusName());
+        if ($this->statusName() === 'new'){
+            $statusName = 'новая заявка';
+        }
+        if ($this->statusName() === 'pending'){
+            $statusName = 'заявка ожидает';
+        }
+        else {
+            $statusName = 'заявка решена';
+        }
+        TicketEvent::make($this, 'Статус обновлен: '.$statusName);
     }
 
     public function setLevel($level)
     {
         $this->update(['level' => $level]);
         if ($level == 1) {
-            TicketEvent::make($this, 'Escalated');
+            TicketEvent::make($this, 'Срочная заявка');
 
             return Assistant::notifyAll(new TicketEscalated($this));
         }
-        TicketEvent::make($this, 'De-Escalated');
+
+        TicketEvent::make($this, 'Срочность снята');
     }
 
     public function isEscalated()

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\TicketType;
 use App\User;
 use Carbon\Carbon;
 use App\Ticket;
@@ -41,26 +42,26 @@ class TicketsController extends Controller
 
     public function show(Ticket $ticket)
     {
+        Carbon::setLocale('ru');
         $this->authorize('view', $ticket);
 
         return view('tickets.show', ['ticket' => $ticket]);
     }
 
-    public function create()
+    public function create($public_token)
     {
+        $ticketType = TicketType::findWithPublicToken($public_token);
+
         $user = auth()->user();
 
-        return view('tickets.create', ['user' => $user]);
+        return view('tickets.create', ['user' => $user], ['ticketType' => $ticketType]);
     }
 
     public function choice()
     {
-        return view('tickets.choice', ['user' => auth()->user()]);
-    }
+        $ticketTypes = TicketType::all();
 
-    public function selection()
-    {
-
+        return view('tickets.choice', ['ticketTypes' => $ticketTypes]);
     }
 
     public function store()
@@ -72,7 +73,11 @@ class TicketsController extends Controller
             'body'      => 'required',
             'team_id'   => 'nullable|exists:teams,id',
         ]);
-        $ticket = Ticket::createAndNotify($requester_id, request('title'), request('body'), request('tags'));
+
+        $glue = '; ';
+        $body = implode($glue, request('body'));
+
+        $ticket = Ticket::createAndNotify($requester_id, request('title'), $body, request('tags'));
         $ticket->updateStatus(request('status'));
 
         if (request('team_id')) {

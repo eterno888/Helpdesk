@@ -6,7 +6,7 @@
 
     <div class="description actions comment mb4">
         <div class="float-left ml4  shadow-outer-1 circle">@gravatar($user->email, 90)</div>
-        <h3 class="ml4 float-left"> @if($user->assistant) <span class="gold">@icon(star)</span> @endif {{ $user->name }}</h3>
+        <h3 class="ml4 float-left"> @if($user->admin) <span class="gold">@icon(star)</span> @endif {{ $user->name }}</h3>
         <div class="clear-both mb-5"> </div>
     </div>
 
@@ -15,11 +15,16 @@
     <div class="description mt4 new-comment">
         {{ Form::open( ["url" => route('profile.update'), 'method' => 'PUT'] ) }}
         <table class="maxw600">
-            <tr><td> {{ __('user.name')     }}: </td><td class="w60">{{ Form::text('name',                     $user->name,    ["class" => "w100"]) }}</td></tr>
-            <tr><td> {{ __('user.email')    }}: </td><td class="w60">{{ Form::email('email',                   $user->email,   ["class" => "w100"]) }}</td></tr>
-            <tr><td> {{ __('user.language') }}: </td><td>{{ Form::select('locale', App\Language::available(),   $user->locale                       ) }}</td></tr>
+            <tr><td> {{ __('user.name')     }}:     </td><td class="w60">{{ Form::text('name',                     $user->name,         ["class" => "w100"]) }}</td></tr>
+            <tr><td> {{ __('user.email')    }}:     </td><td class="w60">{{ Form::email('email',                   $user->email,        ["class" => "w100"]) }}</td></tr>
+            <tr><td> {{ __('user.cabinet')  }}:     </td><td class="w60">{{ Form::text('cabinet',                  $user->cabinet,      ["class" => "w100"]) }}</td></tr>
+            <tr><td> {{ __('user.phone')    }}:     </td><td class="w60">{{ Form::text('phone',                    $user->phone,        ["class" => "w100"]) }}</td></tr>
+            <tr><td> {{ __('user.position') }}:     </td><td class="w60">{{ Form::text('position',                 $user->position,     ["class" => "w100"]) }}</td></tr>
+            <tr><td> {{ __('user.subdivision') }}:  </td><td class="w60">{{ Form::text('subdivision',              $user->subdivision,  ["class" => "w100"]) }}</td></tr>
+            <tr><td> {{ __('user.lead')     }}:     </td><td class="w60">{{ Form::text('lead',                     $user->lead,         ["class" => "w100"]) }}</td></tr>
+            <tr><td> {{ __('user.language') }}:     </td><td>{{ Form::select('locale', App\Language::available(),  $user->locale                      ) }}</td></tr>
             <tr><td></td></tr>
-            <tr><td><H2>{{ trans_choice('user.notification', 2) }}</H2></td></tr>
+        <!--    <tr><td><H2>{{ trans_choice('user.notification', 2) }}</H2></td></tr>
             <tr><td>{{ __('user.newTicketNotification')     }}  </td><td> {{ Form::checkbox('new_ticket_notification',true, $user->settings->new_ticket_notification) }}</td></tr>
             <tr><td>{{ __('user.ticketAssignedNotification')}}  </td><td> {{ Form::checkbox('ticket_assigned_notification',true, $user->settings->ticket_assigned_notification) }}</td></tr>
             <tr><td>{{ __('user.ticketUpdatedNotification') }}  </td><td> {{ Form::checkbox('ticket_updated_notification',true, $user->settings->ticket_updated_notification) }}</td></tr>
@@ -27,7 +32,7 @@
             <tr><td>{{ __('user.leadAssignedNotification')  }}  </td><td> {{ Form::checkbox('lead_assigned_notification',true, $user->settings->lead_assigned_notification) }}</td></tr>
             <tr><td>{{ __('user.newIdeaNotification')       }}  </td><td> {{ Form::checkbox('new_idea_notification',true, $user->settings->new_idea_notification) }}</td></tr>
             <tr><td>{{ __('user.dailyTasksNotification')    }}: </td><td> <input type="checkbox" name="daily_tasks_notification" @if( $user->settings->daily_tasks_notification ) checked @endif></td></tr>
-            <tr><td></td></tr>
+            <tr><td></td></tr>-->
             <tr><td>{{ __('user.ticketsSignature')          }}: </td><td><textarea name="tickets_signature"> {{ $user->settings->tickets_signature }} </textarea> </td></tr>
             <tr><td><button class="ph4 uppercase">@busy {{ __('ticket.update') }}</button></td></tr>
         </table>

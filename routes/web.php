@@ -19,6 +19,7 @@ Route::group(['middleware' => ['auth', 'userLocale']], function () {
     Route::post('tickets/merge', 'TicketsMergeController@store')->name('tickets.merge.store');
     Route::get('tickets/search/{text}', 'TicketsSearchController@index')->name('tickets.search');
     Route::resource('tickets', 'TicketsController', ['except' => ['edit', 'destroy']]);
+    Route::get('tickets/create/{ticketType}', 'TicketsController@create')->name('tickets.create');
     Route::get('ticket/selection', 'TicketsController@choice')->name('tickets.choice');
     Route::post('tickets/{ticket}/assign', 'TicketsAssignController@store')->name('tickets.assign');
     Route::post('tickets/{ticket}/comments', 'CommentsController@store')->name('comments.store');
@@ -35,6 +36,7 @@ Route::group(['middleware' => ['auth', 'userLocale']], function () {
 
         Route::resource('news', 'NewsController');
         Route::post('news', 'NewsController@store')->name('news.store');
+        Route::post('news/display', 'NewsDisplayController@store')->name('news.display.store');
 
         Route::resource('teams', 'TeamsController');
         Route::get('teams/{team}/agents', 'TeamAgentsController@index')->name('teams.agents');
