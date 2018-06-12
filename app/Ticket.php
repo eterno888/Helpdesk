@@ -194,9 +194,6 @@ class Ticket extends BaseModel
             $ticket->updateStatus(Ticket::STATUS_MERGED);
             $this->mergedTickets()->attach($ticket);
         });
-
-        //Короч, есть атрибут checked. Типа как value у других.
-        //И он имеет значение true, false. Его так же можно проверять на сервере
     }
 
     public function updateStatus($status)

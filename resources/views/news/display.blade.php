@@ -6,7 +6,6 @@
 
     {{ Form::open(["url" => route('news.display.store')]) }}
     <input name="news_id" />
-    <input name="news" />
     <button> кнопка дисплейбладе </button>
     {{ Form::close() }}
 @endsection
