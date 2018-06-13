@@ -14,17 +14,17 @@
 
     <div class="description mt4 new-comment">
         {{ Form::open( ["url" => route('profile.update'), 'method' => 'PUT'] ) }}
-        <table class="maxw600">
-            <tr><td> {{ __('user.name')     }}:     </td><td class="w60">{{ Form::text('name',                     $user->name,         ["class" => "w100"]) }}</td></tr>
-            <tr><td> {{ __('user.email')    }}:     </td><td class="w60">{{ Form::email('email',                   $user->email,        ["class" => "w100"]) }}</td></tr>
-            <tr><td> {{ __('user.cabinet')  }}:     </td><td class="w60">{{ Form::text('cabinet',                  $user->cabinet,      ["class" => "w100"]) }}</td></tr>
-            <tr><td> {{ __('user.phone')    }}:     </td><td class="w60">{{ Form::text('phone',                    $user->phone,        ["class" => "w100"]) }}</td></tr>
-            <tr><td> {{ __('user.position') }}:     </td><td class="w60">{{ Form::text('position',                 $user->position,     ["class" => "w100"]) }}</td></tr>
-            <tr><td> {{ __('user.subdivision') }}:  </td><td class="w60">{{ Form::text('subdivision',              $user->subdivision,  ["class" => "w100"]) }}</td></tr>
-            <tr><td> {{ __('user.lead')     }}:     </td><td class="w60">{{ Form::text('lead',                     $user->lead,         ["class" => "w100"]) }}</td></tr>
-            <tr><td> {{ __('user.language') }}:     </td><td>{{ Form::select('locale', App\Language::available(),  $user->locale                      ) }}</td></tr>
+            <table class="maxw600">
+            <tr><td> {{ __('user.name')     }}:    </td><td class="w60">{{ Form::text('name',                     $user->name,         ["class" => "w100"]) }}</td></tr>
+            <tr><td> {{ __('user.email')    }}:    </td><td class="w60">{{ Form::email('email',                   $user->email,        ["class" => "w100"]) }}</td></tr>
+            <tr><td> {{ __('user.cabinet')  }}:    </td><td class="w60">{{ Form::text('cabinet',                  $user->cabinet,      ["class" => "w100"]) }}</td></tr>
+            <tr><td> {{ __('user.phone')    }}:    </td><td class="w60">{{ Form::text('phone',                    $user->phone,        ["class" => "w100"]) }}</td></tr>
+            <tr><td> {{ __('user.position') }}:    </td><td class="w60">{{ Form::text('position',                 $user->position,     ["class" => "w100"]) }}</td></tr>
+            <tr><td> {{ __('user.subdivision') }}: </td><td class="w60">{{ Form::text('subdivision',              $user->subdivision,  ["class" => "w100"]) }}</td></tr>
+            <tr><td> {{ __('user.lead')     }}:    </td><td class="w60">{{ Form::text('lead',                     $user->lead,         ["class" => "w100"]) }}</td></tr>
+            <tr><td> {{ __('user.language') }}:    </td><td>{{ Form::select('locale', App\Language::available(),  $user->locale                      ) }}</td></tr>
             <tr><td></td></tr>
-        <!--    <tr><td><H2>{{ trans_choice('user.notification', 2) }}</H2></td></tr>
+        <!--<tr><td><H2>{{ trans_choice('user.notification', 2) }}</H2></td></tr>
             <tr><td>{{ __('user.newTicketNotification')     }}  </td><td> {{ Form::checkbox('new_ticket_notification',true, $user->settings->new_ticket_notification) }}</td></tr>
             <tr><td>{{ __('user.ticketAssignedNotification')}}  </td><td> {{ Form::checkbox('ticket_assigned_notification',true, $user->settings->ticket_assigned_notification) }}</td></tr>
             <tr><td>{{ __('user.ticketUpdatedNotification') }}  </td><td> {{ Form::checkbox('ticket_updated_notification',true, $user->settings->ticket_updated_notification) }}</td></tr>
@@ -48,7 +48,7 @@
             <tr><td>{{ __('user.oldPassword') }}: </td><td class="w60">{{ Form::password('old', ["class" => "w100"]) }}</td></tr>
             <tr><td>{{ __('user.newPassword') }}: </td><td class="w60">{{ Form::password('password', ["class" => "w100"]) }}</td></tr>
             <tr><td>{{ __('user.confirmPassword') }}: </td><td class="w60">{{ Form::password('password_confirmation', ["class" => "w100"]) }}</td></tr>
-            <tr><td><button class="ph4 uppercase">  {{ __('user.changePassword') }}</button></td></tr>
+            <tr><td><button class="ph4 uppercase" >  {{ __('user.changePassword') }}</button></td></tr>
         </table>
         {{ Form::close() }}
     </div>

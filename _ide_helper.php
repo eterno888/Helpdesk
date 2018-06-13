@@ -8880,7 +8880,9 @@ namespace Illuminate\Support\Facades {
          * Set the route collection instance.
          *
          * @param \Illuminate\Routing\RouteCollection $routes
-         * @return void 
+         * @return void
+         *
+         *
          * @static 
          */
         public static function setRoutes($routes)

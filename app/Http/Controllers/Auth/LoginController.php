@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use App\User;
 
 class LoginController extends Controller
 {
@@ -44,10 +46,8 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function ldap_auth($login, $password, $ad)
+    protected function ldap_auth($login, $password, $ad)
     {
-        require("settings.php");
-
         $ldap = ldap_connect($ad['server'], $ad['port']);
         ldap_set_option($ldap, LDAP_OPT_PROTOCOL_VERSION, 3); //Включаем LDAP протокол версии 3
         if ($ldap) {
@@ -59,4 +59,39 @@ class LoginController extends Controller
         } else
             return false;
     }
+
+    public function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+        $responseLDAP = $this->ldap_auth($credentials['email'], $credentials['password'], $this->ad);
+
+        if($responseLDAP) {
+
+            $user = User::where('email', $credentials['email'])->first();
+
+            if (is_null($user)){
+
+                User::create([
+                    'email'    => $credentials['email'],
+                    'password' => bcrypt($credentials['password']),
+                    'locale' => 'ru',
+                ]);
+            }
+            else{
+               $a = AuthenticatesUsers::login($request);
+
+            }
+            //return redirect('/tickets');
+        }
+        else {
+            dd(2);
+            return redirect('/login');
+        }
+//        return $this->sendLoginResponse($request);
+    }
+
+/*    protected function guard()
+    {
+        return Auth::guard('guard-name');
+    }*/
 }

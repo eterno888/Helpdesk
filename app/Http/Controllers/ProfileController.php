@@ -11,20 +11,28 @@ class ProfileController extends Controller
         return view('profile.show', ['user' => auth()->user()]);
     }
 
-    public function update(Request $request)
+   public function update(Request $request)
     {
         $user = auth()->user();
 
-        $user->update([
-            'name'          => $request->get('name'),
-            'locale'        => $request->get('locale'),
-            'email'         => $request->get('email', $user->email),
-            'cabinet'       => $request->get('cabinet', $user->cabinet),
-            'phone'         => $request->get('phone'),
-            'position'      => $request->get('position'),
-            'subdivision'   => $request->get('subdivision'),
-            'lead'          => $request->get('lead'),
-        ]);
+        $f_json = 'http://api.ugrasu.ru/api.php?view=contacts';
+        $json = file_get_contents("$f_json");
+        $obj = json_decode($json,true);
+        $searchEmail = $user->email;
+        foreach ($obj as $item)
+        {
+            if($item['EMAIL'] == $searchEmail) {
+                $user->update([
+                    'name'          => $item['FIO'],
+                    'locale'        => $request->get('locale'),
+                    'cabinet'       => $item['KORP'],
+                    'phone'         => $item['PHONE'],
+                    'position'      => $item['DOL'],
+                    'subdivision'   => $item['PATH'],
+                    'lead'          => $request->get('lead'),
+                ]);
+            }
+        }
 
         $user->settings()->updateOrCreate([], $request->only('tickets_signature') + $this->notificationSettings($request));
 
