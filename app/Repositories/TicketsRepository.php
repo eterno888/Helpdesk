@@ -18,11 +18,14 @@ class TicketsRepository
         return Ticket::whereStatus(100);
     }
 
+    public function sentByMe()
+    {
+        return Ticket::where('requester_id', '=', auth()->user()->id);
+            //'requester_id', '=', 'user_id');
+    }
+
     public function assignedToMe()
     {
-       /* if (auth()->user()){
-            return Ticket::where('requestors.name', '=', User::name);
-        }*/
 
         return auth()->user()->tickets()->where('status', '<', Ticket::STATUS_SOLVED);
     }

@@ -1,15 +1,15 @@
 <?php
 
 return [
-    'newLeadCreatedDesc' => 'A new lead has been created',
+    'newLeadCreatedDesc' => 'Создано новое руководство',
     'leadAssigned'       => 'Lead assigned',
-    'newTicketCreated'   => 'New ticket created',
-    'newTicket'          => 'New ticket',
-    'ticketCreated'      => 'Ticket created',
-    'ticketAssigned'     => 'Ticket assigned',
-    'ticketAssignedTo'   => 'Ticket assigned to',
-    'ticketUpdated'      => 'Ticket updated',
-    'ticketEscalated'    => 'Ticket escalated',
-    'newIdea'            => 'New idea',
-    'newIdeaCreated'     => 'New idea',
+    'newTicketCreated'   => 'Создана новая заявка',
+    'newTicket'          => 'Новая заявка',
+    'ticketCreated'      => 'Создана заявка',
+    'ticketAssigned'     => 'Заявка назначена',
+    'ticketAssignedTo'   => 'Заявка назначена ',
+    'ticketUpdated'      => 'Заявка обновлена',
+    'ticketEscalated'    => 'Важная заявка',
+    'newIdea'            => 'Новая идея',
+    'newIdeaCreated'     => 'Новая идея',
 ];

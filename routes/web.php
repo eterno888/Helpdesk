@@ -1,6 +1,5 @@
 <?php
 
-//Route::get('/', 'AuthLdapController');
 Route::get('/', 'HomeController@index');
 
 Auth::routes();
@@ -11,6 +10,7 @@ Route::group(['prefix' => 'requester'], function () {
 });
 
 Route::group(['middleware' => ['auth', 'userLocale']], function () {
+
     Route::get('profile', 'ProfileController@show')->name('profile.show');
     Route::put('profile', 'ProfileController@update')->name('profile.update');
     Route::post('password', 'ProfileController@password')->name('profile.password');

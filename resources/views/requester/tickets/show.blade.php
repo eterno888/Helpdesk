@@ -1,4 +1,4 @@
-@extends('layouts.requester')
+@extends('layouts.app')
 @section('content')
     <div class="description comment">
         <h3>{{ $ticket->title }}</h3>
@@ -12,7 +12,7 @@
             <textarea name="body"></textarea>
             <br>
             @if($ticket->status == App\Ticket::STATUS_SOLVED)
-                {{ __('ticket.reopen') }} ? {{ Form::checkbox('reopen') }}
+                 Открыть заново? {{ Form::checkbox('reopen') }}
             @else
                 {{ __('ticket.isSolvedQuestion') }} {{ Form::checkbox('solved') }}
             @endif

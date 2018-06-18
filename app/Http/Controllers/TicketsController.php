@@ -31,6 +31,10 @@ class TicketsController extends Controller
             $tickets = $repository->all();
         }
 
+        if (request('sent')){
+            $tickets = $repository->sentByMe();
+        }
+
         if (request('team')) {
             $tickets = $tickets->where('tickets.team_id', request('team'));
         }

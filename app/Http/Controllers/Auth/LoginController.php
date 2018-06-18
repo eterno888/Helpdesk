@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use App\User;
@@ -14,9 +15,8 @@ class LoginController extends Controller
     | Login Controller
     |--------------------------------------------------------------------------
     |
-    | Этот контроллер обрабатывает аутентификацию пользователей для приложения и
-    | перенаправляя их на главный экран. Контроллер использует trait,
-    | чтобы удобно предоставлять свои функции вашим приложениям.
+    | Этот контроллер обрабатывает аутентификацию пользователей и
+    | перенаправляя их на главную страницу.
     |
     */
 
@@ -29,12 +29,12 @@ class LoginController extends Controller
      */
     protected $redirectTo = '/tickets';
 
-    protected $ad = array(                   // глобальная настройка сервера AD сотрудников
-        'server'       => 'dc.ugrasu.ru',    // адрес AD сервера сотрудников
-        'port'         => '389',             // порт AD сервера сотрудников
-        'domain'       => 'ugrasu.ru',       // доменное имя AD сервера сотрудников
-        'domain_short' => 'ugrasu',          // короткое доменное имя AD сервера сотрудников
-        'search'       => 'OU=Университет, DC=ugrasu, DC=ru');// запрос фамилии из домена сотрудников
+    protected $ad = array(                              // глобальная настройка сервера AD сотрудников
+        'server' => 'dc.ugrasu.ru',                     // адрес AD сервера сотрудников
+        'port' => '389',                                // порт AD сервера сотрудников
+        'domain' => 'ugrasu.ru',                        // доменное имя AD сервера сотрудников
+        'domain_short' => 'ugrasu',                     // короткое доменное имя AD сервера сотрудников
+        'search' => 'OU=Университет, DC=ugrasu, DC=ru');// запрос фамилии из домена сотрудников
 
     /**
      * Создание нового экземпляра контроллера.
@@ -65,33 +65,20 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
         $responseLDAP = $this->ldap_auth($credentials['email'], $credentials['password'], $this->ad);
 
-        if($responseLDAP) {
-
+        if ($responseLDAP) {
             $user = User::where('email', $credentials['email'])->first();
-
-            if (is_null($user)){
-
+            if (is_null($user)) {
                 User::create([
-                    'email'    => $credentials['email'],
+                    'email' => $credentials['email'],
                     'password' => bcrypt($credentials['password']),
                     'locale' => 'ru',
                 ]);
             }
-            else{
-               $a = AuthenticatesUsers::login($request);
-
+            if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+                return redirect('tickets');
             }
-            //return redirect('/tickets');
+        } else {
+            return redirect('login');
         }
-        else {
-            dd(2);
-            return redirect('/login');
-        }
-//        return $this->sendLoginResponse($request);
     }
-
-/*    protected function guard()
-    {
-        return Auth::guard('guard-name');
-    }*/
 }

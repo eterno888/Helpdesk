@@ -7,7 +7,6 @@
         <h3>#{{ $ticket->id }}. {{ $ticket->title }} </h3>
         @busy <span class="label ticket-status-{{ $ticket->statusName() }}">{{ __("ticket." . $ticket->statusName() ) }}</span> &nbsp;
         <span class="date">{{  $ticket->created_at->diffForHumans() }} · {{  $ticket->requester->name }} · {{$ticket->requester->phone}} · {{$ticket->requester->cabinet}}</span>
-        {{--<a class="ml4" title="Public Link" href="{{route('requester.tickets.show',$ticket->public_token)}}"> @icon(globe) </a>--}}
 
         @include('components.ticket.actions')
         <br>
@@ -33,6 +32,7 @@
                     <li><a class="pointer" onClick="setStatusAndSubmit( {{ App\Ticket::STATUS_OPEN    }} )"><div style="width:10px; height:10px" class="circle inline ticket-status-open mr1"></div> {{ __('ticket.commentAs') }} <b>{{ __("ticket.open") }}   </b> </a></li>
                     <li><a class="pointer" onClick="setStatusAndSubmit( {{ App\Ticket::STATUS_PENDING }} )"><div style="width:10px; height:10px" class="circle inline ticket-status-pending mr1"></div> {{ __('ticket.commentAs') }} <b>{{ __("ticket.pending") }}</b> </a></li>
                     <li><a class="pointer" onClick="setStatusAndSubmit( {{ App\Ticket::STATUS_SOLVED  }} )"><div style="width:10px; height:10px" class="circle inline ticket-status-solved mr1"></div> {{ __('ticket.commentAs') }} <b>{{ __("ticket.solved") }} </b> </a></li>
+                    <li><a class="pointer" onClick="setStatusAndSubmit( {{ App\Ticket::STATUS_CLOSED  }} )"><div style="width:10px; height:10px" class="circle inline ticket-status-closed mr1"></div> {{ __('ticket.commentAs') }} <b>{{ __("ticket.closed") }} </b> </a></li>
                 </ul>
             @endif
             {{ Form::close() }}

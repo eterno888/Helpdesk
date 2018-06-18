@@ -27,14 +27,14 @@
                 <div class="mh3 mb2">
                     <button type="submit" class="uppercase ph5 w80">Войти</button>
                 </div>
-                <div class="mb3">
+                <!--<div class="mb3">
                     <input type="checkbox" class="" name="remember" {{ old('remember') ? 'checked' : '' }}>
                     Запомнить меня
                 </div>
 
                 <div>
                     <a class="btn btn-link" href="{{ route('password.request') }}"> Забыли пароль? </a>
-                </div>
+                </div>-->
             </form>
     </div>
 @endsection
