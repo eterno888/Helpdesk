@@ -49,24 +49,16 @@
     <div class="comment new-comment">
         <table class="maxw600 no-padding">
             <tr>
-                <td class="w20">Тема:</td>
+                <td class="w40">Тема:</td>
                 <td><input name="title" class="w100" value="{{$ticketType->name}}" required/></td>
             </tr>
             @include('components.ticket.ticketType')
             <tr>
-                <td>{{ __('ticket.status') }}:</td>
-                <td >
-                    {{ Form::select("status", [
-                        App\Ticket::STATUS_NEW      => __("ticket.new"),
-                        App\Ticket::STATUS_OPEN     => __("ticket.open"),
-                        App\Ticket::STATUS_PENDING  => __("ticket.pending"),
-                    ]) }}
+                <td>
                     <button class="uppercase ph3 ml1"> @icon(comment) {{ __('ticket.send') }}</button>
                 </td>
-
             </tr>
         </table>
     </div>
     {{ Form::close() }}
 @endsection
-

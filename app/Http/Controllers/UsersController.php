@@ -26,4 +26,18 @@ class UsersController extends Controller
 
         return redirect()->route('tickets.index');
     }
+
+    public function edit(User $user)
+    {
+        return view('users.edit', ['user' => $user]);
+    }
+
+    public function update(User $user)
+    {
+        $user->update([
+            'name'              => request('name'),
+        ]);
+
+        return redirect()->route('user.index');
+    }
 }

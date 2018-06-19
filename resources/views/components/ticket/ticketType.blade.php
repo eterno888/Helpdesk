@@ -4,7 +4,7 @@
         <td>{{ __('ticket.description')         }}:</td>
         <td><textarea name="body[]" required></textarea></td>
     </tr>
-    @include('components.assignTeamField')
+    <!--@include('components.assignTeamField')-->
 @endif
 
 <!-- Контент для заявки на заправку картриджа -->

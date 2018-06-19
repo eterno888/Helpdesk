@@ -82,7 +82,7 @@ class TicketsController extends Controller
         $body = implode($glue, request('body'));
 
         $ticket = Ticket::createAndNotify($requester_id, request('title'), $body, request('tags'));
-        $ticket->updateStatus(request('status'));
+        $ticket->updateStatus(Ticket::STATUS_NEW);
 
         if (request('team_id')) {
             $ticket->assignToTeam(request('team_id'));

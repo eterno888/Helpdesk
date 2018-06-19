@@ -6,7 +6,9 @@
 
     <div class="m4">
         <a class="button" href="{{ route("tickets.choice") }}"> @icon(plus) {{ __('ticket.newTicket') }}</a>
-        <a class="button secondary" id="mergeButton" onclick="onMergePressed()"> {{ __('ticket.merge') }}</a>
+        @if(auth()->user()->admin or auth()->user()->assistant)
+            <a class="button secondary" id="mergeButton" onclick="onMergePressed()"> {{ __('ticket.merge') }}</a>
+        @endif
     </div>
 
     <div class="float-right mt-5 mr4">

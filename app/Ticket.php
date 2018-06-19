@@ -89,11 +89,6 @@ class Ticket extends BaseModel
         return $this->hasMany(TicketEvent::class)->latest();
     }
 
-    public function tags()
-    {
-        return $this->morphToMany(Tag::class, 'taggable');
-    }
-
     public function attachments()
     {
         return $this->morphMany(Attachment::class, 'attachable');
@@ -270,5 +265,4 @@ class Ticket extends BaseModel
     {
         return $this->requester->name;
     }
-
 }
