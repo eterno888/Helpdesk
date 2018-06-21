@@ -18,14 +18,12 @@
                 <td><textarea name="body" required></textarea></td>
             </tr>
             <tr>
-                <td>{{ __("news.display") }}:</td>
-                <td>{{ Form::checkbox('display') }}</td>
+                <td class="w20">Отображение:</td>
+                <td>{{Form::checkbox('display', 1, null)}}</td>
             </tr>
-            <tr>
-                <td colspan="2">
-                    <button class="ph4 uppercase"> @busy {{ __('news.new') }}</button>
-                </td>
-            </tr>
+            <td colspan="2">
+                <button class="ph4 uppercase">@busy {{ __('news.update') }}</button>
+            </td>
         </table>
         {{ Form::close() }}
     </div>

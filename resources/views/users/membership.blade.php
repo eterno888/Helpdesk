@@ -14,15 +14,25 @@
     <div class="clear-both"></div>
 
     <div class="description mt4">
-        {{ Form::open(["url" => route('users.update',$user), "method" => "PUT"]) }}
         <table class="maxw600">
             <tr>
                 <td colspan="2"> Назначить пользователя исполнителем</td>
-                {{ Form::open(["url" => route('membership.store'), "method" => "PUT"]) }}
-                @include('components.assignTeamField')
-                <button class="uppercase fs2 p3 mv3">@busy Назначить</button>
-                {{ Form::close() }}
             </tr>
+
+            {{ Form::open(["url" => route('users.membership.store', $user)]) }}
+
+            @php if (! isset($team)) $team = new App\Team; @endphp
+            <tr>
+                <td>{{ trans_choice('team.team',1) }}:</td>
+                <td>{{ Form::select('team_id', createSelectArray( App\Team::all(), true), $team->id) }}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <button class="uppercase ph3 ml1">@busy Назначить</button>
+                </td>
+            </tr>
+            {{ Form::close() }}
         </table>
         {{ Form::close() }}
     </div>

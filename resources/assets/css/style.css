@@ -645,6 +645,10 @@
     background-color: #e73140
 }
 
+.bg-news {
+    background-color: #46A5E0
+}
+
 .bg-success {
     background-color: #33bc8c
 }
@@ -1269,6 +1273,13 @@ div.tagsinput span.tag {
     color: #000;
     font-size: 12px;
     border-radius: 4px
+}
+
+
+div.news{
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }
 
 body {

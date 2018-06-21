@@ -25,11 +25,20 @@ class NewsController extends Controller
         return back();
     }
 
+    /* function debug_to_console( $data ) {
+         $output = $data;
+         if ( is_array( $output ) )
+             $output = implode( ',', $output);
+
+         echo "<script>console.log( 'Debug Objects: " . $output . "' );</script>";
+     }*/
+
     public function store()
     {
         News::create([
-            'title'             => request('title'),
-            'body'              => request('body')
+            'title' => request('title'),
+            'body' => request('body'),
+            'display' => request('display')
         ]);
 
         return redirect()->route('news.index');
@@ -43,8 +52,9 @@ class NewsController extends Controller
     public function update(News $news)
     {
         $news->update([
-            'title'             => request('title'),
-            'body'              => request('body')
+            'title' => request('title'),
+            'body' => request('body'),
+            'display' => request('display')
         ]);
 
         return redirect()->route('news.index');

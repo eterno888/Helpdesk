@@ -46,6 +46,7 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    //Функция настройки LDAP
     protected function ldap_auth($login, $password, $ad)
     {
         $ldap = ldap_connect($ad['server'], $ad['port']);
@@ -60,6 +61,7 @@ class LoginController extends Controller
             return false;
     }
 
+    //Функция авторизации
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');

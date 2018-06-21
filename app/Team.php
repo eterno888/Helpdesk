@@ -8,6 +8,11 @@ class Team extends BaseModel
 {
     use Notifiable;
 
+    public static function findById($team_id)
+    {
+        return self::where('team_id', $team_id)->firstOrFail();
+    }
+
     public static function findByToken($token)
     {
         return self::where('token', $token)->firstOrFail();

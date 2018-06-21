@@ -31,8 +31,8 @@ Route::group(['middleware' => ['auth', 'userLocale']], function () {
     Route::group(['middleware' => 'can:see-admin'], function () {
         Route::resource('users', 'UsersController');
         Route::get('users/{user}/impersonate', 'UsersController@impersonate')->name('users.impersonate');
-        Route::get('users/{token}/join', 'TeamMembershipController@index')->name('membership.index');
-        Route::post('users/{user}/edit/{token}/join', 'TeamMembershipController@store')->name('membership.store');
+        Route::get('membership/{user}', 'TeamMembershipController@index')->name('users.membership');
+        Route::post('membership/{user}/store', 'TeamMembershipController@store')->name('users.membership.store');
         Route::resource('settings', 'SettingsController', ['only' => ['edit', 'update']]);
 
         Route::resource('news', 'NewsController');
@@ -41,8 +41,8 @@ Route::group(['middleware' => ['auth', 'userLocale']], function () {
 
         Route::resource('teams', 'TeamsController');
         Route::get('teams/{team}/agents', 'TeamAgentsController@index')->name('teams.agents');
-        //Route::get('teams/{token}/join', 'TeamMembershipController@index')->name('membership.index');
-        //Route::post('teams/{token}/join', 'TeamMembershipController@store')->name('membership.store');
+        Route::get('teams/{token}/join', 'TeamMembershipController@index')->name('membership.index');
+        Route::post('teams/{token}/join', 'TeamMembershipController@store')->name('membership.store');
     });
 
     Route::get('reports', 'ReportsController@index')->name('reports.index');
