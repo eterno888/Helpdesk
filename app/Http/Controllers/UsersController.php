@@ -32,28 +32,12 @@ class UsersController extends Controller
         return view('users.edit', ['user' => $user]);
     }
 
-    public function membership(Request $request, $user)
-    {
-        $team_id = $request->get('team_id');
-        /*$team = Team::findById($team_id);
-
-           if (! $team->members->contains(auth()->user())) {
-               $team->members()->attach(auth()->user());
-           }*/
-
-        Membership::create([
-            'user_id'           => $user->id,
-            'team_id'           => $team_id]);
-
-        return redirect()->route('users.index');
-    }
-
-    /*public function update(User $user)
+    public function update(User $user)
     {
         $user->update([
             'name'              => request('name'),
         ]);
 
         return redirect()->route('user.index');
-    }*/
+    }
 }

@@ -8,7 +8,14 @@
     @include('layouts.sidebar.tickets')
     <br>
 
-    <!--Раздел базы знаний--
+    <!--Раздел новостей
+    <h4> @icon(newspaper-o)  {{ __('news.news') }}</h4>
+    <ul>
+
+    </ul>
+    <br>
+
+    <!-Раздел базы знаний--
     <h4> @icon(question-circle-o) {{ __('knowledgebase.knowledgebase') }}</h4>
     @include('components.sidebarItem', ["url" => route('knowledgebase.index'), "title" => __('knowledgebase.knowledgebase') ])
     <br>

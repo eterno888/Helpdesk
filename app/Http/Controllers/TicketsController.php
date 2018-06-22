@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\TicketType;
-use App\News;
+use App\User;
 use Carbon\Carbon;
 use App\Ticket;
 use App\Repositories\TicketsRepository;
@@ -63,10 +63,9 @@ class TicketsController extends Controller
 
     public function choice()
     {
-        $news = News::all();
         $ticketTypes = TicketType::all();
 
-        return view('tickets.choice', ['ticketTypes' => $ticketTypes, 'news' => $news]);
+        return view('tickets.choice', ['ticketTypes' => $ticketTypes]);
     }
 
     public function store()

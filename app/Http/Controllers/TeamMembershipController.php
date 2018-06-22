@@ -2,39 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\Membership;
 use App\Team;
 use http\Env\Request;
-use App\User;
 
 class TeamMembershipController extends Controller
 {
-    public function index(User $user)
+    public function index($token)
     {
-        return view('users.membership', ['user' => $user]);
-    }
-
-    /*public function index($token)
-    {
-        $team = Team::findById($token);
+        $team = Team::findByToken($token);
 
         return view('teams.join', ['team' => $team]);
-    }*/
+    }
 
-    public function store(User $user)
+    public function store(Request $request)
     {
-        dd(1);
-        //$team_id = $request->get('team_id');
-        //$team = Team::findById($team_id);
+        $this->validate($request, [
+            'team_id'  => $team_id,
+            'password' => 'confirmed|min:5',
+        ]);
 
-     /*   if (! $team->members->contains(auth()->user())) {
+        $token = $request;
+        $team = Team::findByToken($token);
+        if (! $team->members->contains(auth()->user())) {
             $team->members()->attach(auth()->user());
-        }*/
+        }
 
-        Membership::create([
-            'user_id'           => $user->id,
-            'team_id'           => 1]);
-
-        return redirect()->route('users.index');
+        return redirect()->route('tickets.index');
     }
 }

@@ -13,6 +13,6 @@
 
     @endforeach
     <div>
-@include('components.news.show')
+
 
 @endsection
