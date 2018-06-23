@@ -32,9 +32,10 @@ class TeamMembershipController extends Controller
         return redirect()->route('tickets.index');
     }
 
-    public function destroy(User $user)
+    public function destroy(User $user, Team $team)
     {
-        $membership = Membership::findByUserId($user->id);
+        $membership = Membership::findByUserId($user->id, $team->id);
+
         $membership->delete();
 
         return back();

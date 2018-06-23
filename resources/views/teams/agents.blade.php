@@ -32,9 +32,9 @@
         @foreach($team->members as $user)
             <tr>
                 <td> @include("components.gravatar",["user" => $user]) </td>
-                <td> {{ $user->name }}</td>
+                <td> {{ $user->name }} </td>
                 <td> <a href="mailto:{{$user->email}}" target="_blank">{{ $user->email }}</a></td>
-                <td> <a href="{{ route('membership.destroy', $user) }}" class="delete-resource"> @icon(trash)</a></td>
+                <td> <a href="{{ route('membership.destroy', [$user, $team]) }}" class="delete-resource"> @icon(trash)</a></td>
             </tr>
         @endforeach
         </tbody>

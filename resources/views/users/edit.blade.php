@@ -19,10 +19,9 @@
         <p>Отдела:
             @php if (! isset($team)) $team = new App\Team; @endphp
             {{ Form::select('team_id', createSelectArray( App\Team::all(), true), $team->id) }}</p>
-
         <p> Назначить пользователя администратором {{Form::checkbox('admin', 1, $user->admin)}}</p>
 
-        <button class="uppercase ph3">@busy Назначить</button>
+        <button class="uppercase ph3">@busy Сохранить</button>
         {{ Form::close() }}
     </div>
 @endsection

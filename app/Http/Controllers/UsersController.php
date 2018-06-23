@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Membership;
 use App\User;
+use App\Team;
 
 class UsersController extends Controller
 {
@@ -45,15 +47,26 @@ class UsersController extends Controller
     {
         $assistant = request('assistant');
         $admin = request('admin');
+        $team_id = request('team_id');
 
         if ($assistant === null) $assistant = 0;
         if ($admin === null) $admin = 0;
 
         $user->update([
-            'admin'     => $admin,
+            'admin' => $admin,
             'assistant' => $assistant
         ]);
 
-        return redirect()->route('users.index');
+        //if (($assistant === 1) and (!$team_id === null)) {
+
+            Membership::create([
+                'user_id' => $user->id,
+                'team_id' => $team_id,
+                'admin'   => 0
+            ]);
+            dd(2);
+
+        //}
+            return redirect()->route('users.index');
+        }
     }
-}
