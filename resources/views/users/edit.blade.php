@@ -7,8 +7,7 @@
     </div>
 
     <div class="description actions comment mb4">
-        <div class="float-left ml4 mt-2  circle">@gravatar($user->name, 90)</div>
-        <h3 class="ml4 float-left"> {{ $user->name }}</h3>
+        <h3 class="ml0"> {{ $user->name }}</h3>
     </div>
 
     <div class="clear-both"></div>

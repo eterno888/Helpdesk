@@ -4,6 +4,11 @@
         <h3>Сотрудники ( {{ $users->count() }} )</h3>
     </div>
 
+    <div class="m4">
+        <input id="searcher" placeholder="{{__('ticket.search')}}" class="ml2">
+        <div class="inline ml-4">@icon(search)</div>
+    </div>
+
     @paginator($users)
     <table class="striped">
         <thead>
@@ -30,4 +35,10 @@
         </tbody>
     </table>
     @paginator($users)
+@endsection
+
+@section('scripts')
+    <script>
+        $("#searcher").searcher('tickets/search/');
+    </script>
 @endsection
