@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Membership;
 use App\Team;
+use App\User;
 use http\Env\Request;
 
 class TeamMembershipController extends Controller
@@ -28,5 +30,13 @@ class TeamMembershipController extends Controller
         }
 
         return redirect()->route('tickets.index');
+    }
+
+    public function destroy(User $user)
+    {
+        $membership = Membership::findByUserId($user->id);
+        $membership->delete();
+
+        return back();
     }
 }

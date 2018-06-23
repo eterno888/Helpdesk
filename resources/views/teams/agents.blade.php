@@ -5,7 +5,7 @@
         {{ $team->name }} ( {{ $team->members->count() }} )</h3>
     </div>
 
-    @can('administrate', $team)
+    <!--@can('administrate', $team)
         <div class="comment actions mb4">
             <h4>{{ __("team.invitationLinkDesc") }}: </h4>
             <div>
@@ -17,14 +17,15 @@
                 <a class="ml2 pointer button" onclick="copyToClipboard('#register-link2-{{$team->id}}')">@icon(clipboard) Copy the register link to clipboard</a>
             </div>
         </div>
-    @endcan
+    @endcan-->
 
     <table class="striped">
         <thead>
         <tr>
             <th class="small p2"></th>
-            <th> {{ trans_choice('team.member',2) }}        </th>
-            <th> {{ trans_choice('team.email',2) }}        </th>
+            <th> {{ trans_choice('team.member',2) }} </th>
+            <th> {{ trans_choice('team.email',2) }}  </th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -33,6 +34,7 @@
                 <td> @include("components.gravatar",["user" => $user]) </td>
                 <td> {{ $user->name }}</td>
                 <td> <a href="mailto:{{$user->email}}" target="_blank">{{ $user->email }}</a></td>
+                <td> <a href="{{ route('membership.destroy', $user) }}" class="delete-resource"> @icon(trash)</a></td>
             </tr>
         @endforeach
         </tbody>

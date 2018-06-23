@@ -41,7 +41,8 @@ Route::group(['middleware' => ['auth', 'userLocale']], function () {
 
         Route::resource('teams', 'TeamsController');
         Route::get('teams/{team}/agents', 'TeamAgentsController@index')->name('teams.agents');
-        Route::get('teams/{token}/join', 'TeamMembershipController@index')->name('membership.index');
+        Route::delete('teams/{user}/destroy', 'TeamMembershipController@destroy')->name('membership.destroy');
+        //Route::get('teams/{token}/join', 'TeamMembershipController@index')->name('membership.index');
         Route::post('teams/{token}/join', 'TeamMembershipController@store')->name('membership.store');
     });
 
