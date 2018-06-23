@@ -32,12 +32,28 @@ class UsersController extends Controller
         return view('users.edit', ['user' => $user]);
     }
 
-    public function update(User $user)
+    /*public function update(User $user)
     {
         $user->update([
             'name'              => request('name'),
         ]);
 
         return redirect()->route('user.index');
+    }*/
+
+    public function role(User $user)
+    {
+        $assistant = request('assistant');
+        $admin = request('admin');
+
+        if ($assistant === null) $assistant = 0;
+        if ($admin === null) $admin = 0;
+
+        $user->update([
+            'admin'     => $admin,
+            'assistant' => $assistant
+        ]);
+
+        return redirect()->route('users.index');
     }
 }

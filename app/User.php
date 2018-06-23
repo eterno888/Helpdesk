@@ -17,7 +17,8 @@ class User extends Authenticatable
 
     protected $table = 'users';
 
-    protected $guarded = ['admin', 'assistant'];
+    protected $fillable = ['admin', 'assistant'];
+    //protected $guarded = ['admin', 'assistant'];
 
     protected $hidden = [
         'password', 'remember_token',

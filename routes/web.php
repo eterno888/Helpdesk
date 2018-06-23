@@ -31,8 +31,8 @@ Route::group(['middleware' => ['auth', 'userLocale']], function () {
     Route::group(['middleware' => 'can:see-admin'], function () {
         Route::resource('users', 'UsersController');
         Route::get('users/{user}/impersonate', 'UsersController@impersonate')->name('users.impersonate');
-        Route::get('users/{token}/join', 'TeamMembershipController@index')->name('membership.index');
-        Route::post('users/{user}/edit/{token}/join', 'TeamMembershipController@store')->name('membership.store');
+        Route::put('users/{user}/edit', 'UsersController@role')->name('users.role');
+
         Route::resource('settings', 'SettingsController', ['only' => ['edit', 'update']]);
 
         Route::resource('news', 'NewsController');
