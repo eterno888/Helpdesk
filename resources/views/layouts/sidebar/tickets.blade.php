@@ -13,5 +13,8 @@
         @include('components.sidebarItem', ["url" => route('tickets.index') . "?closed=true",       "title" => __('ticket.closed')])
     @else
         @include('components.sidebarItem', ["url" => route('tickets.index') . "?sent=true",       "title" => __('ticket.myTickets'),  "count" => $repository->sentByMe()            ->count()])
+        @include('components.sidebarItem', ["url" => route('tickets.index') . "?solved=true",       "title" => __('ticket.solved')])
+        @include('components.sidebarItem', ["url" => route('tickets.index') . "?closed=true",       "title" => __('ticket.closed')])
+
     @endif
 </ul>

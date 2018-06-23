@@ -20,13 +20,11 @@ class TicketsRepository
 
     public function sentByMe()
     {
-        return Ticket::where('requester_id', '=', auth()->user()->id);
-            //'requester_id', '=', 'user_id');
+        return Ticket::where('requester_id', '=', auth()->user()->id)->where('status', '<', Ticket::STATUS_SOLVED);
     }
 
     public function assignedToMe()
     {
-
         return auth()->user()->tickets()->where('status', '<', Ticket::STATUS_SOLVED);
     }
 
@@ -59,6 +57,10 @@ class TicketsRepository
             return Ticket::where('status', '=', Ticket::STATUS_SOLVED);
         }
 
+        if (!auth()->user()->admin and !auth()->user()->assistant){
+            return Ticket::where('requester_id', '=', auth()->user()->id)->where('status', '=', Ticket::STATUS_SOLVED);
+        }
+
         return auth()->user()->teamsTickets()->where('status', '=', Ticket::STATUS_SOLVED);
     }
 
@@ -66,6 +68,10 @@ class TicketsRepository
     {
         if (auth()->user()->admin) {
             return Ticket::where('status', '=', Ticket::STATUS_CLOSED);
+        }
+
+        if (!auth()->user()->admin and !auth()->user()->assistant){
+            return Ticket::where('requester_id', '=', auth()->user()->id)->where('status', '=', Ticket::STATUS_CLOSED);
         }
 
         return auth()->user()->teamsTickets()->where('status', '=', Ticket::STATUS_CLOSED);
