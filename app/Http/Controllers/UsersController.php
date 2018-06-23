@@ -57,16 +57,14 @@ class UsersController extends Controller
             'assistant' => $assistant
         ]);
 
-        //if (($assistant === 1) and (!$team_id === null)) {
+        if (($assistant == 1) and (!$team_id == null)) {
 
-            Membership::create([
+            Membership::firstOrCreate([
                 'user_id' => $user->id,
                 'team_id' => $team_id,
-                'admin'   => 0
+                'admin' => 0
             ]);
-            dd(2);
-
-        //}
+        }
             return redirect()->route('users.index');
         }
     }

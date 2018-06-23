@@ -16,7 +16,7 @@
         {{ Form::open(["url" => route('users.role', $user), "method" => "PUT"]) }}
 
         <p> Назначить пользователя исполнителем {{Form::checkbox('assistant', 1, $user->assistant)}}</p>
-        <p>Отдела:
+        <p> Отдела:
             @php if (! isset($team)) $team = new App\Team; @endphp
             {{ Form::select('team_id', createSelectArray( App\Team::all(), true), $team->id) }}</p>
         <p> Назначить пользователя администратором {{Form::checkbox('admin', 1, $user->admin)}}</p>
