@@ -7,12 +7,10 @@
     </div>
 
     <div class="m4">
-    @foreach($ticketTypes as $ticketType)
+        @foreach($ticketTypes as $ticketType)
+            <a class="button" href="{{ route('tickets.create', $ticketType) }}"> {{ $ticketType->name }} </a> <br><br>
+        @endforeach
 
-        <a class="button" href="{{ route('tickets.create', $ticketType) }}"> {{ $ticketType->name }} </a> <br><br>
-
-    @endforeach
-    <div>
-
-
+        @include('components.news.show')
+    </div>
 @endsection

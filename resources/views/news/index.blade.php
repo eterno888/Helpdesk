@@ -6,7 +6,6 @@
 
     <div class="m4">
         <a class="button" href="{{ route("news.create") }}" >@icon(plus) {{ __('news.new') }}</a>
-        <a class="button secondary" id="displayButton" onclick="onDisplayPressed()"> Отображение </a>
     </div>
 
     @paginator($news)
@@ -35,8 +34,4 @@
         </tbody>
     </table>
     @paginator($news)
-@endsection
-
-@section('scripts')
-    @include('components.js.display')
 @endsection

@@ -28,8 +28,9 @@ class NewsController extends Controller
     public function store()
     {
         News::create([
-            'title'             => request('title'),
-            'body'              => request('body')
+            'title'   => request('title'),
+            'body'    => request('body'),
+            'display' => request('display')
         ]);
 
         return redirect()->route('news.index');
@@ -43,8 +44,9 @@ class NewsController extends Controller
     public function update(News $news)
     {
         $news->update([
-            'title'             => request('title'),
-            'body'              => request('body')
+            'title'   => request('title'),
+            'body'    => request('body'),
+            'display' => request('display')
         ]);
 
         return redirect()->route('news.index');
