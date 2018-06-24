@@ -8,28 +8,23 @@
     @include('layouts.sidebar.tickets')
     <br>
 
-    <!--Раздел новостей
-    <h4> @icon(newspaper-o)  {{ __('news.news') }}</h4>
-    <ul>
-
-    </ul>
-    <br>
-
-    <!-Раздел базы знаний--
+    <!--Раздел базы знаний--
     <h4> @icon(question-circle-o) {{ __('knowledgebase.knowledgebase') }}</h4>
     @include('components.sidebarItem', ["url" => route('knowledgebase.index'), "title" => __('knowledgebase.knowledgebase') ])
     <br>
     -->
 
-<!--Раздел отчетов-->
-    <h4> @icon(bar-chart) {{ trans_choice('report.report', 2) }}</h4>
-    <ul>
-        @include('components.sidebarItem', ["url" => route('statistics.index'), "title" => trans_choice('report.statistics', 2) ])
-        @include('components.sidebarItem', ["url" => route('reports.index'), "title" => trans_choice('report.report', 2) ])
-    </ul>
-    <br>
+    <!--Раздел отчетов-->
+    @if((auth()->user()->admin) or (auth()->user()->assistant))
+        <h4> @icon(bar-chart) {{ trans_choice('report.report', 2) }}</h4>
+        <ul>
+            @include('components.sidebarItem', ["url" => route('statistics.index'), "title" => trans_choice('report.statistics', 2) ])
+            @include('components.sidebarItem', ["url" => route('reports.index'), "title" => trans_choice('report.report', 2) ])
+        </ul>
+        <br>
+    @endif
 
-    <!--Раздел панели админа-->
+<!--Раздел панели админа-->
     @if(auth()->user()->admin)
         <h4> @icon(cog) {{ __('admin.admin') }}</h4>
         <ul>
