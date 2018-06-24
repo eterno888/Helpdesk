@@ -27,13 +27,14 @@ class TicketsController extends Controller
             $tickets = $repository->closed();
         } elseif (request('escalated')) {
             $tickets = $repository->escalated();
+        } elseif (request('sent')) {
+            $tickets = $repository->sentByMe();
+        } elseif (request('rating')){
+            $tickets = $repository->rating();
         } else {
             $tickets = $repository->all();
         }
 
-        if (request('sent')){
-            $tickets = $repository->sentByMe();
-        }
 
         if (request('team')) {
             $tickets = $tickets->where('tickets.team_id', request('team'));

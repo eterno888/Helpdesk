@@ -15,6 +15,6 @@
         @include('components.sidebarItem', ["url" => route('tickets.index') . "?sent=true",       "title" => __('ticket.myTickets'),  "count" => $repository->sentByMe()            ->count()])
         @include('components.sidebarItem', ["url" => route('tickets.index') . "?solved=true",       "title" => __('ticket.solved')])
         @include('components.sidebarItem', ["url" => route('tickets.index') . "?closed=true",       "title" => __('ticket.closed')])
-
+        @include('components.sidebarItem', ["url" => route('tickets.index') . "?rating=true",       "title" => __('ticket.rating'),  "count" => $repository->rating()            ->count()]);
     @endif
 </ul>

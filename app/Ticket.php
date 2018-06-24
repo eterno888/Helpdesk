@@ -64,6 +64,11 @@ class Ticket extends BaseModel
         return $this->belongsTo(User::class);
     }
 
+    public function rating()
+    {
+        return $this->hasOne(Rating::class);
+    }
+
     public function team()
     {
         return $this->belongsTo(Team::class);

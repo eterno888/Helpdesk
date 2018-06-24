@@ -9,4 +9,10 @@ class Rating extends BaseModel
         return self::where('ticket_id', $ticket_id);
     }
 
+    public function tickets()
+    {
+        return $this->belongsTo(Ticket::class);
+    }
+
+
 }

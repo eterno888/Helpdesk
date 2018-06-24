@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Requester;
 use App\Ticket;
-use App\User;
+use App\Rating;
 use Carbon\Carbon;
 
 class TicketsRepository
@@ -16,6 +16,11 @@ class TicketsRepository
         }
 
         return Ticket::whereStatus(100);
+    }
+
+    public function rating()
+    {
+        return Ticket::doesntHave('rating')->where('status', '=', Ticket::STATUS_SOLVED);
     }
 
     public function sentByMe()
