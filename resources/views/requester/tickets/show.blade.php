@@ -10,9 +10,14 @@
         <div class="comment new-comment">
             @if($ticket->status == App\Ticket::STATUS_SOLVED)
                 Открыть заново? {{ Form::checkbox('reopen') }}
-            <br><br>
-                Оцените работу исполнителя:
-
+                <br>
+                @if(!App\Rating::where('ticket_id', $ticket->id)->exists())
+                    {{Form::open(["url" => route("ticket.rating", $ticket)])}}
+                    Оцените работу исполнителя от 1 до 5:
+                    {{Form::number('rating', null, ['min' =>1, 'max'=>5])}}
+                    <button class="uppercase ph3"> @busy Оценить</button>
+                    {{Form::close()}}
+                @endif
             @else
                 {{ Form::open(["url" => route("requester.comments.store",$ticket->public_token)]) }}
                 <textarea name="body"></textarea>

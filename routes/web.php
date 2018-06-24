@@ -7,6 +7,7 @@ Auth::routes();
 Route::group(['prefix' => 'requester'], function () {
     Route::get('tickets/{token}', 'RequesterTicketsController@show')->name('requester.tickets.show');
     Route::post('tickets/{token}/comments', 'RequesterCommentsController@store')->name('requester.comments.store');
+    Route::post('tickets/{ticket}/rating', 'RequesterTicketsController@rating')->name('ticket.rating');
 });
 
 Route::group(['middleware' => ['auth', 'userLocale']], function () {
