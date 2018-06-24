@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
+use App\Rating;
+use App\Ticket;
+use App\User;
+
 
 class StatisticsController extends Controller
 {
     public function index()
     {
-        $startDate = request('startDate') ?: Carbon::now()->startOfMonth();
-        $endDate   = request('endDate') ?: Carbon::now()->endOfMonth();
+        $users = User::all();
+        $ticket = Ticket::all();
 
-        return view('reports.statistics', ['repository' => $repository->forDates($startDate, $endDate)]);
+
+        return view('reports.statistics', ['users' => $users], ['ticket' => $ticket]);
     }
 }

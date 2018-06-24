@@ -24,6 +24,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class, 'requester_id');
+    }
+
     public function tickets()
     {
         return $this->hasMany(Ticket::class)->with('user', 'team');
