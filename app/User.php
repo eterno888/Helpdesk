@@ -39,12 +39,6 @@ class User extends Authenticatable
         return $this->belongsToMany(Team::class, 'memberships')->withPivot('admin');
     }
 
-    public function settings()
-    {
-        //return UserSettings::firstOrCreate(["user_id" => $this->id]);
-        return $this->hasOne(UserSettings::class)->withDefault();
-    }
-
     public function teamsTickets()
     {
         return Ticket::join('memberships', 'tickets.team_id', '=', 'memberships.team_id')
@@ -53,20 +47,6 @@ class User extends Authenticatable
         //return $this->hasManyThrough(Ticket::class, Membership::class,"user_id","team_id")->with('requester','user','team');
     }
 
-    public function tasks()
-    {
-        return $this->hasMany(Task::class);
-    }
-
-    public function uncompletedTasks()
-    {
-        return $this->hasMany(Task::class)->where('completed', false);
-    }
-
-    public function todayTasks()
-    {
-        return $this->hasMany(Task::class)->where('completed', false)->where('datetime', '<', Carbon::tomorrow());
-    }
 
     /**
      * @deprecated

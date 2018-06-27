@@ -47,7 +47,7 @@
                 @include('components.increment', ["value" => $repository->average(App\Kpi\Kpi::KPI_REOPENED, auth()->user()) ])
             </td>
         </tr>
-        @foreach(auth()->user()->teams as $team)
+        @foreach(App\Team::all() as $team)
             <tr>
                 <td> {{ $team->name }} </td>
                 <td> {{ $repository->tickets( $team ) }}           </td>

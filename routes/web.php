@@ -14,7 +14,6 @@ Route::group(['middleware' => ['auth', 'userLocale']], function () {
 
     Route::get('profile', 'ProfileController@show')->name('profile.show');
     Route::put('profile', 'ProfileController@update')->name('profile.update');
-    Route::post('password', 'ProfileController@password')->name('profile.password');
 
     Route::get('tickets/merge', 'TicketsMergeController@index')->name('tickets.merge.index');
     Route::post('tickets/merge', 'TicketsMergeController@store')->name('tickets.merge.store');

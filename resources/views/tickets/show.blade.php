@@ -10,7 +10,6 @@
 
         @include('components.ticket.actions')
         <br>
-        @include('components.ticket.merged')
     </div>
 
 
