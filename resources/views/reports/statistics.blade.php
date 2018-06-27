@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="description">
-        <h3> Статистика </h3>
+        <h3> Рейтинг </h3>
     </div>
 
     <table class="striped">
