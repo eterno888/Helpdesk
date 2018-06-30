@@ -34,7 +34,7 @@ class Comment extends BaseModel
         return array_only($this->author()->toArray(), ['name', 'email']);
     }
 
-    public function notifyNewComment()
+   /*public function notifyNewComment()
     {
         tap(new NewComment($this->ticket, $this), function ($newCommentNotification) {
             if ($this->ticket->team) {
@@ -55,5 +55,5 @@ class Comment extends BaseModel
     private function shouldNotifyUser()
     {
         return $this->ticket->user && (! auth()->user() || auth()->user()->id != $this->ticket->user->id);
-    }
+    }*/
 }

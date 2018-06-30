@@ -48,7 +48,7 @@ class Team extends BaseModel
         return $this->tickets()->where('status', '=', Ticket::STATUS_CLOSED);
     }
 
-    public function routeNotificationForSlack($full = false)
+   /* public function routeNotificationForSlack($full = false)
     {
         if ($full) {
             return $this->slack_webhook_url;
@@ -58,7 +58,7 @@ class Team extends BaseModel
         }
 
         return null;
-    }
+    }*/
 
     public static function membersByTeam()
     {

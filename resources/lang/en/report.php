@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'report'                 => 'Отчёт|Отчёты',
+    'report'                 => 'Статистика',
     'firstReplyTime'         => 'Время первого ответа',
     'solveTime'              => 'Время решения',
-    'onTouchResolutionRatio' => 'Коэффициент разрешения одного касания',
-    'reopenedRatio'          => 'Повторно открытое соотношение',
+    'onTouchResolutionRatio' => 'Быстрое решение',
+    'reopenedRatio'          => 'Повторно открытые',
     'filter'                 => 'Фильтр',
-    'statistics'             => 'Статистика',
+    'statistics'             => 'Рейтинг',
 ];

@@ -2,8 +2,8 @@
 
 return [
     'report'                 => 'Статистика',
-    'firstReplyTime'         => 'Время первого ответа',
-    'solveTime'              => 'Время решения',
+    'firstReplyTime'         => 'Среднее время первого ответа',
+    'solveTime'              => 'Среднее время решения',
     'onTouchResolutionRatio' => 'Быстрое решение',
     'reopenedRatio'          => 'Повторно открытые',
     'filter'                 => 'Фильтр',

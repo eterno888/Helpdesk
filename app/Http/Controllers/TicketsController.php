@@ -29,7 +29,7 @@ class TicketsController extends Controller
             $tickets = $repository->escalated();
         } elseif (request('sent')) {
             $tickets = $repository->sentByMe();
-        } elseif (request('rating')){
+        } elseif (request('rating')) {
             $tickets = $repository->rating();
         } else {
             $tickets = $repository->all();
@@ -75,15 +75,15 @@ class TicketsController extends Controller
         $requester_id = auth()->user()->id;
 
         $this->validate(request(), [
-            'title'     => 'required|min:3',
-            'body'      => 'required',
-            'team_id'   => 'nullable|exists:teams,id',
+            'title'   => 'required|min:3',
+            'body'    => 'required',
+            'team_id' => 'nullable|exists:teams,id',
         ]);
 
         $glue = '; ';
         $body = implode($glue, request('body'));
 
-        $ticket = Ticket::createAndNotify($requester_id, request('title'), $body, request('tags'));
+        $ticket = Ticket::createAndNotify($requester_id, request('title'), $body);
         $ticket->updateStatus(Ticket::STATUS_NEW);
 
         if (request('team_id')) {
@@ -91,7 +91,6 @@ class TicketsController extends Controller
         }
 
         return redirect()->route('tickets.index');
-        //return redirect()->route('tickets.show', $ticket);
     }
 
     public function reopen(Ticket $ticket)

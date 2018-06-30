@@ -41,12 +41,12 @@ class Ticket extends BaseModel
             'ticket_type_id' => $ticket_type_id
         ]);
 
-      /*  tap(new TicketCreated($ticket), function ($newTicketNotification) use ($requester) {
-            Admin::notifyAll($newTicketNotification);
-            $requester->notify($newTicketNotification);
-        });*/
-
         return $ticket;
+    }
+
+    public function requester()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public static function findWithPublicToken($public_token)
@@ -55,11 +55,6 @@ class Ticket extends BaseModel
     }
 
     public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function requester()
     {
         return $this->belongsTo(User::class);
     }
@@ -152,7 +147,7 @@ class Ticket extends BaseModel
             'body'       => $body,
             'user_id'    => $user ? $user->id : null,
             'new_status' => $newStatus ?: $this->status,
-        ])->notifyNewComment();
+        ]);
         event(new TicketCommented($this, $comment, $previousStatus));
 
         return $comment;
@@ -163,7 +158,6 @@ class Ticket extends BaseModel
         if (! $body) {
             return;
         }
-        //if( ! $this->user && $user) { $this->user()->associate($user)->save(); }  //We don't want the notes to automatically assign the user
         else {
             $this->touch();
         }
@@ -173,12 +167,6 @@ class Ticket extends BaseModel
             'new_status' => $this->status,
             'private'    => true,
         ]);
-        tap(new NewComment($this, $comment), function ($newCommentNotification) {
-            if ($this->team) {
-                $this->team->notify($newCommentNotification);
-            }
-            Admin::notifyAll($newCommentNotification);
-        });
 
         return $comment;
     }
@@ -216,8 +204,6 @@ class Ticket extends BaseModel
         $this->update(['level' => $level]);
         if ($level == 1) {
             TicketEvent::make($this, 'Срочная заявка');
-
-            return Assistant::notifyAll(new TicketEscalated($this));
         }
 
         TicketEvent::make($this, 'Срочность снята');

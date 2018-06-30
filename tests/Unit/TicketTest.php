@@ -15,39 +15,6 @@ class TicketTest extends TestCase
     use RefreshDatabase;
 
    /** @test */
-   public function can_attach_tags(){
-        $ticket = factory(Ticket::class)->create();
-        $ticket->attachTags([
-            "tag1", "tag2", "tag1"
-        ]);
-        $this->assertCount(2, $ticket->tags);
-   }
-
-   /** @test */
-   public function can_attach_tags_as_string(){
-       $ticket = factory(Ticket::class)->create();
-       $ticket->attachTags("hello,world,world");
-       $this->assertCount(2, $ticket->tags);
-   }
-
-   /** @test */
-   public function can_get_tags_string(){
-       $ticket = factory(Ticket::class)->create();
-       $ticket->attachTags(["hello","world"]);
-       $this->assertEquals("hello,world", $ticket->tagsString());
-   }
-
-   /** @test */
-   public function can_detach_a_tag(){
-       $ticket = factory(Ticket::class)->create();
-       $ticket->attachTags(["hello","world"]);
-
-       $ticket->detachTag("world");
-
-       $this->assertEquals("hello",$ticket->tags[0]->name);
-       $this->assertCount(1,$ticket->tags);
-   }
-   /** @test */
    public function adding_the_first_comment_assigns_the_ticket_to_the_user(){
        Notification::fake();
        $user    = factory(User::class)->create();
@@ -83,45 +50,6 @@ class TicketTest extends TestCase
        $this->assertEquals(Ticket::STATUS_SOLVED, $ticket->status);
    }
 
-   /** @test */
-   public function can_merge_tickets(){
-       $user    = factory(User::class)->create();
-
-       $ticket1 = factory(Ticket::class)->create(["status" => Ticket::STATUS_NEW]);
-       $ticket2 = factory(Ticket::class)->create(["status" => Ticket::STATUS_NEW]);
-       $ticket3 = factory(Ticket::class)->create(["status" => Ticket::STATUS_NEW]);
-
-       $ticket1->merge($user,  [$ticket2->id, $ticket3] );
-
-       $this->assertEquals( Ticket::STATUS_NEW,    $ticket1->fresh()->status );
-       $this->assertEquals( Ticket::STATUS_MERGED, $ticket2->fresh()->status );
-       $this->assertEquals( Ticket::STATUS_MERGED, $ticket3->fresh()->status );
-       $this->assertCount(1, $ticket2->commentsAndNotes);
-       $this->assertEquals("Merged with #1", $ticket2->commentsAndNotes->first()->body);
-       $this->assertCount(1, $ticket3->commentsAndNotes);
-       $this->assertEquals("Merged with #1", $ticket3->commentsAndNotes->first()->body);
-
-       $this->assertTrue( $ticket1->mergedTickets->contains($ticket2) );
-       $this->assertTrue( $ticket1->mergedTickets->contains($ticket3) );
-   }
-
-   /** @test */
-   public function merging_to_itself_is_not_merged(){
-       $user    = factory(User::class)->create();
-
-       $ticket1 = factory(Ticket::class)->create(["status" => Ticket::STATUS_NEW]);
-       $ticket2 = factory(Ticket::class)->create(["status" => Ticket::STATUS_NEW]);
-
-       $ticket1->merge($user,  [$ticket1->id, $ticket2] );
-
-       $this->assertEquals( Ticket::STATUS_NEW,    $ticket1->fresh()->status );
-       $this->assertEquals( Ticket::STATUS_MERGED, $ticket2->fresh()->status );
-       $this->assertCount(1, $ticket2->commentsAndNotes);
-       $this->assertEquals("Merged with #1", $ticket2->commentsAndNotes->first()->body);
-       $this->assertCount(0, $ticket1->commentsAndNotes);
-
-       $this->assertTrue( $ticket1->mergedTickets->contains($ticket2) );
-   }
 
    /** @test */
    public function adding_a_comment_when_escalated_it_is_added_as_a_note(){

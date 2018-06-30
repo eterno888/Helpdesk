@@ -13,7 +13,6 @@ trait Assignable
             return;
         }
         $this->user()->associate($user)->save();
-        $user->notify($this->getAssignedNotification());
         TicketEvent::make($this, "Назначение исполнителя: {$user->name}");
     }
 
@@ -26,7 +25,6 @@ trait Assignable
             return;
         }
         $this->team()->associate($team)->save();
-        $team->notify($this->getAssignedNotification());
         TicketEvent::make($this, "Назначение отдела: {$team->name}");
     }
 }

@@ -8,19 +8,19 @@ use Illuminate\Support\Facades\DB;
 
 class Kpi extends BaseModel
 {
-    const TYPE_ALL  = 1;
+    const TYPE_ALL = 1;
     const TYPE_USER = 2;
     const TYPE_TEAM = 3;
 
-    const KPI_FIRST_REPLY          = 1;
-    const KPI_SOLVED               = 2;
+    const KPI_FIRST_REPLY = 1;
+    const KPI_SOLVED = 2;
     const KPI_ONE_TOUCH_RESOLUTION = 3;
-    const KPI_REOPENED             = 4;
-    const KPI_UNANSWERED_TICKETS   = 5;
+    const KPI_REOPENED = 4;
+    const KPI_UNANSWERED_TICKETS = 5;
 
     public $incrementing = false;
-    public $timestamps   = false;
-    protected $table     = 'kpis';
+    public $timestamps = false;
+    protected $table = 'kpis';
 
     const KPI = null;
 
@@ -31,13 +31,13 @@ class Kpi extends BaseModel
     {
         parent::__construct($attributes);
         $this->startDate = Carbon::today()->startOfMonth();
-        $this->endDate   = Carbon::tomorrow();
+        $this->endDate = Carbon::tomorrow();
     }
 
     public function forDates($start, $end = null)
     {
         $this->startDate = $start;
-        $this->endDate   = $end ?: $start->tomorrow();
+        $this->endDate = $end ?: $start->tomorrow();
 
         return $this;
     }
@@ -47,10 +47,10 @@ class Kpi extends BaseModel
         Carbon::setLocale('ru');
 
         return static::firstOrCreate([
-            'date'        => $date->toDateString(),
+            'date' => $date->toDateString(),
             'relation_id' => $relation_id,
-            'type'        => $type,
-            'kpi'         => static::KPI,
+            'type' => $type,
+            'kpi' => static::KPI,
         ]);
     }
 
@@ -59,22 +59,22 @@ class Kpi extends BaseModel
         $newTotal = $this->total + $value;
 
         return static::where([
-                'date'        => $this->date,
-                'relation_id' => $this->relation_id,
-                'type'        => $this->type,
-                'kpi'         => $this->kpi,
-            ])->update([
-                'total' => $newTotal >= 0 ? $newTotal : 0,
-                'count' => $this->count + 1,
-            ]);
+            'date' => $this->date,
+            'relation_id' => $this->relation_id,
+            'type' => $this->type,
+            'kpi' => $this->kpi,
+        ])->update([
+            'total' => $newTotal >= 0 ? $newTotal : 0,
+            'count' => $this->count + 1,
+        ]);
     }
 
     public function forUser($user)
     {
         $result = static::whereBetween('date', [$this->startDate, $this->endDate])
-                          ->where(['relation_id' => $user->id, 'type' => self::TYPE_USER, 'kpi' => static::KPI])
-                         ->select(DB::raw('sum(total*100)/sum(count*100.0) as avg'))
-                         ->first();
+            ->where(['relation_id' => $user->id, 'type' => self::TYPE_USER, 'kpi' => static::KPI])
+            ->select(DB::raw('sum(total*100)/sum(count*100.0) as avg'))
+            ->first();
 
         return $result->avg ?? null;
     }
@@ -82,9 +82,9 @@ class Kpi extends BaseModel
     public function forTeam($team)
     {
         $result = static::whereBetween('date', [$this->startDate, $this->endDate])
-                         ->where(['relation_id' => $team->id, 'type' => self::TYPE_TEAM, 'kpi' => static::KPI])
-                         ->select(DB::raw('sum(total*100)/sum(count*100.0) as avg'))
-                         ->first();
+            ->where(['relation_id' => $team->id, 'type' => self::TYPE_TEAM, 'kpi' => static::KPI])
+            ->select(DB::raw('sum(total*100)/sum(count*100.0) as avg'))
+            ->first();
 
         return $result->avg ?? null;
     }
@@ -92,9 +92,9 @@ class Kpi extends BaseModel
     public function forType($type)
     {
         $result = static::whereBetween('date', [$this->startDate, $this->endDate])
-                          ->where(['type' => $type, 'kpi' => static::KPI])
-                         ->select(DB::raw('sum(total*100)/sum(count*100.0) as avg'))
-                         ->first();
+            ->where(['type' => $type, 'kpi' => static::KPI])
+            ->select(DB::raw('sum(total*100)/sum(count*100.0) as avg'))
+            ->first();
 
         return $result->avg ?? null;
     }
