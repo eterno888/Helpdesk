@@ -74,20 +74,35 @@ class TicketsController extends Controller
     {
         $requester_id = auth()->user()->id;
 
+        $ticket_type_id = TicketType::findWithTitle(request('title'))->id;
+
+        if ($ticket_type_id === 1)
+            $team_id = null;
+        if ($ticket_type_id === 2)
+            $team_id = 1;
+        if ($ticket_type_id === 3)
+            $team_id = 1;
+        if ($ticket_type_id === 4)
+            $team_id = 1;
+        if ($ticket_type_id === 5)
+            $team_id = 2;
+        if ($ticket_type_id === 6)
+            $team_id = 1;
+
         $this->validate(request(), [
             'title'   => 'required|min:3',
-            'body'    => 'required',
-            'team_id' => 'nullable|exists:teams,id',
+            'body'    => 'required'
         ]);
 
         $glue = '; ';
         $body = implode($glue, request('body'));
 
         $ticket = Ticket::createAndNotify($requester_id, request('title'), $body);
+
         $ticket->updateStatus(Ticket::STATUS_NEW);
 
-        if (request('team_id')) {
-            $ticket->assignToTeam(request('team_id'));
+        if ($team_id) {
+            $ticket->assignToTeam($team_id);
         }
 
         return redirect()->route('tickets.index');

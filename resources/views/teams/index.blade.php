@@ -17,9 +17,6 @@
             <th> {{ trans_choice('team.email',1) }}         </th>
             <th> {{ trans_choice('team.member',2) }}        </th>
             <th> {{ __('team.phone') }}                     </th>
-            <th> {{ trans_choice('team.invitationLink',1) }}</th>
-            <th></th>
-            <th></th>
             <th></th>
         </tr>
         </thead>
@@ -31,16 +28,7 @@
                 <td><a href="mailto:{{ $team->email }}">{{ $team->email }}</a></td>
                 <td><a href="{{route('teams.agents',$team)}}">{{ $team->members->count() }}</a></td>
                 <td> {{ $team->phone }}</td>
-                @can('administrate', $team)
-                    <td>
-                        <a href="{{route('membership.store',$team->token)}}"> {{ __("team.invitationLink") }}</a>
-                        <div class="hidden"
-                             id="register-link-{{$team->id}}"> {{ route('membership.store',$team->token)}} </div>
-                        <a class="ml2 pointer" onclick="copyToClipboard('#register-link-{{$team->id}}')">@icon(clipboard)</a>
-                    </td>
-                @else
-                    <td></td>
-                @endcan
+
                 <th><a href="{{route('tickets.index')}}?team={{$team->id}}"> @icon(inbox) </a></th>
                 @can('administrate', $team)
                     <th><a href="{{route('teams.edit',$team)}}"> @icon(pencil) </a></th>

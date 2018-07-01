@@ -32,13 +32,25 @@ class Ticket extends BaseModel
     {
 
         $ticket_type_id = TicketType::findWithTitle($title)->id;
+        if ($ticket_type_id === 1)
+            $team_id = null;
+        if ($ticket_type_id === 2)
+            $team_id = 1;
+        if ($ticket_type_id === 3)
+            $team_id = 1;
+        if ($ticket_type_id === 4)
+            $team_id = 1;
+        if ($ticket_type_id === 5)
+            $team_id = 2;
+        if ($ticket_type_id === 6)
+            $team_id = 1;
 
         $ticket = Ticket::create([
             'requester_id'   => $requester_id,
             'title'          => $title,
             'body'           => $body,
             'public_token'   => str_random(24),
-            'ticket_type_id' => $ticket_type_id
+            'team_id'        => $team_id
         ]);
 
         return $ticket;
